@@ -10,8 +10,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var http_1 = require('@angular/http');
-// import { Observable }     from 'rxjs/Observable';
-require('rxjs/add/operator/toPromise');
+// import 'rxjs/add/operator/toPromise';
+require('rxjs/add/operator/catch');
+var Observable_1 = require('rxjs/Observable');
 var config_1 = require('../config');
 var DrinkServices = (function () {
     function DrinkServices(http) {
@@ -21,15 +22,28 @@ var DrinkServices = (function () {
         this.fullDrinkUrl = this.host + "/" + this.drinkUrl;
         this.http = http;
     }
-    DrinkServices.prototype.getDrinks = function () {
-        return this.http.get(this.fullDrinkUrl)
-            .toPromise()
-            .then(function (response) { return response.json(); })
+    DrinkServices.prototype.getDrink = function (id) {
+        var body = {
+            id: id
+        };
+        return this.http.get(this.fullDrinkUrl + "/" + id)
+            .map(this.extractData)
             .catch(this.handleError);
     };
+    DrinkServices.prototype.getDrinks = function () {
+        return this.http.get(this.fullDrinkUrl)
+            .map(this.extractData)
+            .catch(this.handleError);
+    };
+    DrinkServices.prototype.extractData = function (res) {
+        var body = res.json();
+        return body || {};
+    };
     DrinkServices.prototype.handleError = function (error) {
-        console.error('An error occurred', error);
-        return Promise.reject(error.message || error);
+        var errMsg = (error.message) ? error.message :
+            error.status ? error.status + " - " + error.statusText : 'Server error';
+        console.error(errMsg); // log to console instead
+        return Observable_1.Observable.throw(errMsg);
     };
     DrinkServices = __decorate([
         core_1.Injectable(), 

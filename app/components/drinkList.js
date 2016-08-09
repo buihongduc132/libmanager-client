@@ -19,10 +19,7 @@ var DrinkListComponent = (function () {
     DrinkListComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.drinkServices.getDrinks()
-            .then(function (data) {
-            _this.drinks = data;
-        })
-            .catch(function (error) { return _this.drinks = error; });
+            .subscribe(function (drinks) { return _this.drinks = drinks; }, function (error) { return _this.errorMessage = error; });
     };
     DrinkListComponent = __decorate([
         core_1.Component({

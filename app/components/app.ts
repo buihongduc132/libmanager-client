@@ -1,13 +1,10 @@
-import { Component }
-from '@angular/core';
+import { Component } from '@angular/core';
 
-import { RouteConfig, 
-    ROUTER_DIRECTIVES,
-    ROUTER_PROVIDERS } 
-from '@angular/router-deprecated';
+import { ROUTER_DIRECTIVES } from '@angular/router';
 
 import { DrinkListComponent } from './drinkList';
-// import { ShowListComponent } from './common/showList';
+import { DrinkDetailComponent } from './drinkDetail';
+import { ShowListComponent } from './common/showList';
 
 import { DrinkServices } from '../services/drinkService';
 
@@ -15,23 +12,14 @@ import { DrinkServices } from '../services/drinkService';
     selector: 'lib-app',
     templateUrl: 'app/templates/app.html',
     directives: [
-        ROUTER_DIRECTIVES,
-        DrinkListComponent
+        DrinkListComponent,
+        DrinkDetailComponent,
+        ROUTER_DIRECTIVES
     ],
     providers: [
-        ROUTER_PROVIDERS,
         DrinkServices
     ]
 })
-
-@RouteConfig([
-    {
-        path: '/drinks',
-        name: 'Drinks',
-        component: DrinkListComponent,
-        useAsDefault: true
-    }
-])
 
 export class AppComponent {
 

@@ -9,9 +9,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var router_deprecated_1 = require('@angular/router-deprecated');
+var router_1 = require('@angular/router');
 var drinkList_1 = require('./drinkList');
-// import { ShowListComponent } from './common/showList';
+var drinkDetail_1 = require('./drinkDetail');
 var drinkService_1 = require('../services/drinkService');
 var AppComponent = (function () {
     function AppComponent() {
@@ -21,22 +21,14 @@ var AppComponent = (function () {
             selector: 'lib-app',
             templateUrl: 'app/templates/app.html',
             directives: [
-                router_deprecated_1.ROUTER_DIRECTIVES,
-                drinkList_1.DrinkListComponent
+                drinkList_1.DrinkListComponent,
+                drinkDetail_1.DrinkDetailComponent,
+                router_1.ROUTER_DIRECTIVES
             ],
             providers: [
-                router_deprecated_1.ROUTER_PROVIDERS,
                 drinkService_1.DrinkServices
             ]
-        }),
-        router_deprecated_1.RouteConfig([
-            {
-                path: '/drinks',
-                name: 'Drinks',
-                component: drinkList_1.DrinkListComponent,
-                useAsDefault: true
-            }
-        ]), 
+        }), 
         __metadata('design:paramtypes', [])
     ], AppComponent);
     return AppComponent;

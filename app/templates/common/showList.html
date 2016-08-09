@@ -1,7 +1,8 @@
 <ul class="list-group">
     <li class="list-group-item" 
+    
     *ngFor="let item of items">
-        <span class="tag tag-default tag-pill pull-xs-right">
+        <span [hidden]="!showPrice" class="tag tag-default tag-pill pull-xs-right">
             {{ item.price }}
         </span>
         {{ item.name }}

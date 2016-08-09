@@ -22,9 +22,9 @@ export class DrinkListComponent implements OnInit {
 
     ngOnInit() {
         this.drinkServices.getDrinks()
-        .then(data => {
-            this.drinks = data;
-        })
-        .catch(error => this.drinks = error);
+        .subscribe(
+            drinks => this.drinks = drinks,
+            error => this.errorMessage = <any>error);
+        )
     }
 }
