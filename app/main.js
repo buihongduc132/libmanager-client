@@ -1,8 +1,8 @@
 "use strict";
+// import { HTTP_PROVIDERS } from '@angular/http';
+// import { appRouterProviders } from './routes';
 var platform_browser_dynamic_1 = require('@angular/platform-browser-dynamic');
-var app_1 = require('./components/app');
-var http_1 = require('@angular/http');
-var routes_1 = require('./routes');
-platform_browser_dynamic_1.bootstrap(app_1.AppComponent, [http_1.HTTP_PROVIDERS, routes_1.appRouterProviders
-]);
+var app_module_1 = require('./modules/app.module');
+platform_browser_dynamic_1.platformBrowserDynamic()
+    .bootstrapModule(app_module_1.AppModule);
 //# sourceMappingURL=main.js.map

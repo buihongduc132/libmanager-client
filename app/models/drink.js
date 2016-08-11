@@ -13,4 +13,4 @@ var Drink = (function (_super) {
     return Drink;
 }(baseObject_1.BaseObject));
 exports.Drink = Drink;
-//# sourceMappingURL=drink.js.map
+//# sourceMappingURL=Drink.js.map

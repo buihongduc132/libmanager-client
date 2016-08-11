@@ -9,25 +9,24 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var router_1 = require('@angular/router');
-var drinkService_1 = require('../services/drinkService');
+// import { ROUTER_DIRECTIVES } from '@angular/router';
+// import { DrinkListComponent } from './drinkList';
+// import { DrinkDetailComponent } from './drinkDetail';
+// import { ShowListComponent } from './common/showList';
+// import { DrinkServices } from '../services/drinkService';
 var AppComponent = (function () {
     function AppComponent() {
     }
     AppComponent = __decorate([
         core_1.Component({
             selector: 'lib-app',
-            templateUrl: 'app/templates/app.html',
-            directives: [
-                router_1.ROUTER_DIRECTIVES
-            ],
-            providers: [
-                drinkService_1.DrinkServices
-            ]
+            templateUrl: 'app/templates/app.template.html',
+            directives: [],
+            providers: []
         }), 
         __metadata('design:paramtypes', [])
     ], AppComponent);
     return AppComponent;
 }());
 exports.AppComponent = AppComponent;
-//# sourceMappingURL=app.js.map
+//# sourceMappingURL=app.component.js.map
