@@ -10,8 +10,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
-var drinkList_1 = require('./drinkList');
-var drinkDetail_1 = require('./drinkDetail');
 var drinkService_1 = require('../services/drinkService');
 var AppComponent = (function () {
     function AppComponent() {
@@ -21,8 +19,6 @@ var AppComponent = (function () {
             selector: 'lib-app',
             templateUrl: 'app/templates/app.html',
             directives: [
-                drinkList_1.DrinkListComponent,
-                drinkDetail_1.DrinkDetailComponent,
                 router_1.ROUTER_DIRECTIVES
             ],
             providers: [

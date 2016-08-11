@@ -12,8 +12,6 @@ import { DrinkServices } from '../services/drinkService';
     selector: 'lib-app',
     templateUrl: 'app/templates/app.html',
     directives: [
-        DrinkListComponent,
-        DrinkDetailComponent,
         ROUTER_DIRECTIVES
     ],
     providers: [

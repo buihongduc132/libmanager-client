@@ -17,9 +17,16 @@ var DrinkListComponent = (function () {
         this.showProperties = [];
     }
     DrinkListComponent.prototype.ngOnInit = function () {
+        // this.drinkServices.getDrink(1)
+        //     .subscribe(
+        //     drink => {
+        //         this.drink = drink
+        //         console.log(drink);
+        //     },
+        //     error => this.errorMessage = error);
         var _this = this;
-        this.drinkServices.getDrinks()
-            .subscribe(function (drinks) { return _this.drinks = drinks; }, function (error) { return _this.errorMessage = error; });
+        this.drinkServices.getDrink(1)
+            .subscribe(function (drink) { return _this.drink = drink; }, function (error) { return _this.errorMessage = error; });
     };
     DrinkListComponent = __decorate([
         core_1.Component({

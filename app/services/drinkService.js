@@ -13,6 +13,7 @@ var http_1 = require('@angular/http');
 // import 'rxjs/add/operator/toPromise';
 require('rxjs/add/operator/catch');
 var Observable_1 = require('rxjs/Observable');
+require('../rxjsOperators');
 var config_1 = require('../config');
 var DrinkServices = (function () {
     function DrinkServices(http) {
@@ -23,10 +24,13 @@ var DrinkServices = (function () {
         this.http = http;
     }
     DrinkServices.prototype.getDrink = function (id) {
-        var body = {
-            id: id
-        };
-        return this.http.get(this.fullDrinkUrl + "/" + id)
+        // let body = {
+        //   id: id
+        // }
+        // return this.http.get(`${this.fullDrinkUrl}/${id}`)
+        //   .map(this.extractData)
+        //   .catch(this.handleError);
+        return this.http.get(this.fullDrinkUrl)
             .map(this.extractData)
             .catch(this.handleError);
     };

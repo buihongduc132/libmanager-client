@@ -4,18 +4,14 @@ import { Headers, Http, Response, RequestOptions } from '@angular/http';
 // import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/catch';
 import { Observable }     from 'rxjs/Observable';
+import '../rxjsOperators';
 
 import { Drink } from '../models/drink'
 
 import { Config } from '../config';
 
 @Injectable()
-
-
 export class DrinkServices {
-  constructor(private http: Http) {
-    this.http = http;
-  }
 
   private host = Config.host;
 
@@ -23,11 +19,20 @@ export class DrinkServices {
 
   private fullDrinkUrl = `${this.host}/${this.drinkUrl}`;
 
+  constructor(private http: Http) {
+    this.http = http;
+
+  }
+
+
   getDrink(id: number): Observable<Drink> {
-    let body = {
-      id: id
-    }
-    return this.http.get(`${this.fullDrinkUrl}/${id}`)
+    // let body = {
+    //   id: id
+    // }
+    // return this.http.get(`${this.fullDrinkUrl}/${id}`)
+    //   .map(this.extractData)
+    //   .catch(this.handleError);
+    return this.http.get(this.fullDrinkUrl)
       .map(this.extractData)
       .catch(this.handleError);
   }
