@@ -24,13 +24,7 @@ var DrinkServices = (function () {
         this.http = http;
     }
     DrinkServices.prototype.getDrink = function (id) {
-        // let body = {
-        //   id: id
-        // }
-        // return this.http.get(`${this.fullDrinkUrl}/${id}`)
-        //   .map(this.extractData)
-        //   .catch(this.handleError);
-        return this.http.get(this.fullDrinkUrl)
+        return this.http.get(this.fullDrinkUrl + "/" + id)
             .map(this.extractData)
             .catch(this.handleError);
     };

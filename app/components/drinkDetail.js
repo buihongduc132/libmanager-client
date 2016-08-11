@@ -11,39 +11,30 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
 var drinkService_1 = require('../services/drinkService');
+var drink_1 = require('../models/drink');
 var showList_1 = require('./common/showList');
 var DrinkDetailComponent = (function () {
     function DrinkDetailComponent(drinkServices, route) {
         this.drinkServices = drinkServices;
         this.route = route;
+        this.drink = new drink_1.Drink;
     }
-    // ngOnDestroy() {
-    //     this.sub.unsubcribe();
-    // }
+    DrinkDetailComponent.prototype.ngOnDestroy = function () {
+        this.sub.unsubcribe();
+    };
     DrinkDetailComponent.prototype.ngOnInit = function () {
-        // this.drinkService.getDrink(1)
-        //     .subscribe(
-        //     drink => {   
-        //         this.drink = drink;
-        //         console.log(this.drink);
-        //     },
-        //     error => this.errorMessage = error
-        //     )
         var _this = this;
-        this.drinkServices.getDrinks()
-            .subscribe(function (drinks) {
-            _this.drink = drinks[0];
-        }, function (error) { return _this.errorMessage = error; });
-        // this.sub = this.route.params.subscribe(params => {
-        //     let id = +params['id'];
-        //     this.drinkService.getDrink(id)
-        //     .subscribe(
-        //         drink => this.drink = drink,
-        //         error => this.errorMessage = error
-        //     )
-        // })
+        this.sub = this.route.params.subscribe(function (params) {
+            var id = +params['id'];
+            _this.getDrink(id);
+        });
     };
     DrinkDetailComponent.prototype.getDrink = function (id) {
+        var _this = this;
+        this.drinkServices.getDrink(id)
+            .subscribe(function (drink) {
+            _this.drink = drink;
+        }, function (error) { return _this.errorMessage = error; });
     };
     DrinkDetailComponent = __decorate([
         core_1.Component({

@@ -15,6 +15,9 @@ var ShowListComponent = (function () {
     ShowListComponent.prototype.ngOnInit = function () {
         this.title = "testing";
     };
+    ShowListComponent.prototype.goToDetail = function (id) {
+        alert(id);
+    };
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Array)

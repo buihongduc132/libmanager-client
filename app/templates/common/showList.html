@@ -1,6 +1,6 @@
 <ul class="list-group">
     <li class="list-group-item" 
-    
+    (click)="goToDetail(item.id)"
     *ngFor="let item of items">
         <span [hidden]="!showPrice" class="tag tag-default tag-pill pull-xs-right">
             {{ item.price }}

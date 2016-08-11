@@ -14,4 +14,8 @@ export class ShowListComponent implements OnInit {
     ngOnInit() {
         this.title = "testing";
     }
+
+    goToDetail(id :number) {
+        alert(id);
+    }
 }

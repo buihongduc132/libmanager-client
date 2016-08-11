@@ -26,13 +26,7 @@ export class DrinkServices {
 
 
   getDrink(id: number): Observable<Drink> {
-    // let body = {
-    //   id: id
-    // }
-    // return this.http.get(`${this.fullDrinkUrl}/${id}`)
-    //   .map(this.extractData)
-    //   .catch(this.handleError);
-    return this.http.get(this.fullDrinkUrl)
+    return this.http.get(`${this.fullDrinkUrl}/${id}`)
       .map(this.extractData)
       .catch(this.handleError);
   }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Drink } from '../models/drink';
 import { DrinkServices } from '../services/drinkService';
@@ -14,27 +14,24 @@ export class DrinkListComponent implements OnInit {
     constructor(
         private drinkServices: DrinkServices
     ) {
-
     }
 
-    drinks: Drink[];
-    drink: Drink;
+    drinks: Drink[] = new Array();
     showProperties: string[] = [];
     errorMessage: any;
 
+    ngOnDestroy() {
+
+    }
+    
     ngOnInit() {
-        // this.drinkServices.getDrink(1)
-        //     .subscribe(
-        //     drink => {
-        //         this.drink = drink
-        //         console.log(drink);
-        //     },
-        //     error => this.errorMessage = error);
+        this.getDrinks();
+    }
 
-        this.drinkServices.getDrink(1)
+    getDrinks() {
+        this.drinkServices.getDrinks()
             .subscribe(
-            drink => this.drink = drink,
+            drinks => this.drinks = drinks,
             error => this.errorMessage = error);
-
     }
 }
