@@ -9,11 +9,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-// import { ROUTER_DIRECTIVES } from '@angular/router';
-// import { DrinkListComponent } from './drinkList';
-// import { DrinkDetailComponent } from './drinkDetail';
-// import { ShowListComponent } from './common/showList';
-// import { DrinkServices } from '../services/drinkService';
 var AppComponent = (function () {
     function AppComponent() {
     }

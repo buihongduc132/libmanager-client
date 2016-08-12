@@ -10,31 +10,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var http_1 = require('@angular/http');
-// import 'rxjs/add/operator/toPromise';
 require('rxjs/add/operator/catch');
-require('../rxjsOperators');
-var logs_1 = require('../common/logs');
-var DAO_1 = require('../common/DAO');
-var config_1 = require('../config');
-var DrinkServices = (function () {
-    function DrinkServices(http) {
+var CommonServices = (function () {
+    function CommonServices(http) {
+        this.http = http;
         this.http = http;
     }
-    DrinkServices.prototype.getDrinks = function () {
-        return this.http.get(config_1.Config.host + "/" + config_1.Config.route.drink.list)
-            .map(DAO_1.DAO.extractData)
-            .catch(logs_1.Logs.handleError);
-    };
-    DrinkServices.prototype.getDrink = function (id) {
-        return this.http.get(config_1.Config.host + "/" + config_1.Config.route.drink.list + "/" + id)
-            .map(DAO_1.DAO.extractData)
-            .catch(logs_1.Logs.handleError);
-    };
-    DrinkServices = __decorate([
+    CommonServices = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [http_1.Http])
-    ], DrinkServices);
-    return DrinkServices;
+    ], CommonServices);
+    return CommonServices;
 }());
-exports.DrinkServices = DrinkServices;
-//# sourceMappingURL=drinkService.js.map
+exports.CommonServices = CommonServices;
+//# sourceMappingURL=commonService.js.map

@@ -11,16 +11,30 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
 var app_component_1 = require('../components/app.component');
+var drinkList_component_1 = require('../components/drinkList.component');
+var drinkDetail_component_1 = require('../components/drinkDetail.component');
+var showList_component_1 = require('../components/common/showList.component');
+var app_routes_1 = require('../Routes/app.routes');
+var http_1 = require('@angular/http');
 var AppModule = (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         core_1.NgModule({
             imports: [
-                platform_browser_1.BrowserModule
+                platform_browser_1.BrowserModule,
+                http_1.HttpModule,
+                http_1.JsonpModule,
+                app_routes_1.routing
+            ],
+            providers: [
+                app_routes_1.appRoutingProviders
             ],
             declarations: [
-                app_component_1.AppComponent
+                app_component_1.AppComponent,
+                drinkList_component_1.DrinkListComponent,
+                drinkDetail_component_1.DrinkDetailComponent,
+                showList_component_1.ShowListComponent
             ],
             bootstrap: [
                 app_component_1.AppComponent

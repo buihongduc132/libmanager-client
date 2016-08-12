@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 
-// import { ROUTER_DIRECTIVES } from '@angular/router';
+import { ROUTER_DIRECTIVES } from '@angular/router';
 
-// import { DrinkListComponent } from './drinkList';
-// import { DrinkDetailComponent } from './drinkDetail';
-// import { ShowListComponent } from './common/showList';
+import { DrinkListComponent } from './drinkList.component';
+// import { DrinkDetailComponent } from './drinkDetail.component';
+import { ShowListComponent } from './common/showList.component';
 
-// import { DrinkServices } from '../services/drinkService';
+import { DrinkServices } from '../services/drinkService';
 
 @Component( {
     selector: 'lib-app',
