@@ -19,13 +19,13 @@ export class DrinkServices {
   }
 
   getDrinks(): Observable<Drink[]> {
-    return this.http.get(`${Config.host}/${Config.route.drink.list}`)
+    return this.http.get(`${Config.host}/${Config.route.server.drink.list}`)
       .map(DAO.extractData)
       .catch(Logs.handleError);
   }
 
   getDrink(id: number): Observable<Drink> {
-    return this.http.get(`${Config.host}/${Config.route.drink.list}/${id}`)
+    return this.http.get(`${Config.host}/${Config.route.server.drink.list}/${id}`)
       .map(DAO.extractData)
       .catch(Logs.handleError);
   }

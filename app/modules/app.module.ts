@@ -8,17 +8,26 @@ import { AppComponent }
 from '../components/app.component';
 
 import { DrinkListComponent } 
-from '../components/drinkList.component';
+from '../components/drink/drinkList.component';
 
 import { DrinkDetailComponent } 
-from '../components/drinkDetail.component';
+from '../components/drink/drinkDetail.component';
+
+import { MaterialListComponent }
+from '../components/material/materialList.component';
 
 import { ShowListComponent } 
 from '../components/common/showList.component';
 
 import { routing
     , appRoutingProviders
- } from '../Routes/app.routes';
+ } from '../Routes/app.routing';
+
+ import { drinksRouting }
+ from '../Routes/drinks.routing';
+
+import { materialsRouting }
+from '../Routes/materials.routing';
 
 import { HttpModule
     , JsonpModule
@@ -31,6 +40,8 @@ import { HttpModule
         , HttpModule
         , JsonpModule
         , routing
+        , drinksRouting
+        , materialsRouting
     ]
     , providers: [  
         appRoutingProviders
@@ -40,6 +51,7 @@ import { HttpModule
         , DrinkListComponent
         , DrinkDetailComponent
         , ShowListComponent
+        , MaterialListComponent
     ]
     , bootstrap: [
         AppComponent

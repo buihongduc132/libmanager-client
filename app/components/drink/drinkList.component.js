@@ -9,14 +9,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var drinkService_1 = require('../services/drinkService');
-var showList_component_1 = require('./common/showList.component');
+var drinkService_1 = require('../../services/drinkService');
+var showList_component_1 = require('../common/showList.component');
+var config_1 = require('../../config');
 var DrinkListComponent = (function () {
     function DrinkListComponent(drinkServices) {
         this.drinkServices = drinkServices;
         this.drinks = new Array();
         this.showProperties = [];
-        this.type = 'dish';
+        this.type = config_1.Config.route.client.drink.list;
     }
     DrinkListComponent.prototype.ngOnDestroy = function () {
     };
@@ -31,7 +32,7 @@ var DrinkListComponent = (function () {
     DrinkListComponent = __decorate([
         core_1.Component({
             selector: 'drink-list',
-            templateUrl: 'app/templates/drinkList.template.html',
+            templateUrl: 'app/templates/drink/drinkList.template.html',
             directives: [
                 showList_component_1.ShowListComponent
             ],
@@ -44,4 +45,4 @@ var DrinkListComponent = (function () {
     return DrinkListComponent;
 }());
 exports.DrinkListComponent = DrinkListComponent;
-//# sourceMappingURL=drinkList.component.js.map
+//# sourceMappingURL=drinklist.component.js.map

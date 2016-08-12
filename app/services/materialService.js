@@ -16,25 +16,27 @@ require('../rxjsOperators');
 var logs_1 = require('../common/logs');
 var DAO_1 = require('../common/DAO');
 var config_1 = require('../config');
-var DrinkServices = (function () {
-    function DrinkServices(http) {
+var MaterialServices = (function () {
+    function MaterialServices(http) {
         this.http = http;
     }
-    DrinkServices.prototype.getDrinks = function () {
-        return this.http.get(config_1.Config.host + "/" + config_1.Config.route.server.drink.list)
+    MaterialServices.prototype.getMaterials = function () {
+        return this.http
+            .get(config_1.Config.host + "/" + config_1.Config.route.server.material.list)
             .map(DAO_1.DAO.extractData)
             .catch(logs_1.Logs.handleError);
     };
-    DrinkServices.prototype.getDrink = function (id) {
-        return this.http.get(config_1.Config.host + "/" + config_1.Config.route.server.drink.list + "/" + id)
+    MaterialServices.prototype.getMaterial = function (id) {
+        return this.http
+            .get(config_1.Config.host + "/" + config_1.Config.route.server.material.list + "/" + id)
             .map(DAO_1.DAO.extractData)
             .catch(logs_1.Logs.handleError);
     };
-    DrinkServices = __decorate([
+    MaterialServices = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [http_1.Http])
-    ], DrinkServices);
-    return DrinkServices;
+    ], MaterialServices);
+    return MaterialServices;
 }());
-exports.DrinkServices = DrinkServices;
-//# sourceMappingURL=drinkService.js.map
+exports.MaterialServices = MaterialServices;
+//# sourceMappingURL=materialService.js.map

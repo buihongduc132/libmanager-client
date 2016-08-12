@@ -22,7 +22,6 @@ export class ShowListComponent implements OnInit {
     @Input() showProperties: string[];
     @Input() showPrice: boolean;
     @Input() type: string;
-    title: string;
 
     constructor(
         private router: Router
@@ -36,11 +35,10 @@ export class ShowListComponent implements OnInit {
     errorMessage: any;
 
     ngOnInit() {
-        this.title = "testing";
         
     }
 
     goToDetail(id: number, type: string) {
-        this.router.navigate(['/'+type], id);
+        this.router.navigate(['/'+type, id]);
     }
 }

@@ -11,10 +11,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
 var app_component_1 = require('../components/app.component');
-var drinkList_component_1 = require('../components/drinkList.component');
-var drinkDetail_component_1 = require('../components/drinkDetail.component');
+var drinkList_component_1 = require('../components/drink/drinkList.component');
+var drinkDetail_component_1 = require('../components/drink/drinkDetail.component');
+var materialList_component_1 = require('../components/material/materialList.component');
 var showList_component_1 = require('../components/common/showList.component');
-var app_routes_1 = require('../Routes/app.routes');
+var app_routing_1 = require('../Routes/app.routing');
+var drinks_routing_1 = require('../Routes/drinks.routing');
+var materials_routing_1 = require('../Routes/materials.routing');
 var http_1 = require('@angular/http');
 var AppModule = (function () {
     function AppModule() {
@@ -25,16 +28,19 @@ var AppModule = (function () {
                 platform_browser_1.BrowserModule,
                 http_1.HttpModule,
                 http_1.JsonpModule,
-                app_routes_1.routing
+                app_routing_1.routing,
+                drinks_routing_1.drinksRouting,
+                materials_routing_1.materialsRouting
             ],
             providers: [
-                app_routes_1.appRoutingProviders
+                app_routing_1.appRoutingProviders
             ],
             declarations: [
                 app_component_1.AppComponent,
                 drinkList_component_1.DrinkListComponent,
                 drinkDetail_component_1.DrinkDetailComponent,
-                showList_component_1.ShowListComponent
+                showList_component_1.ShowListComponent,
+                materialList_component_1.MaterialListComponent
             ],
             bootstrap: [
                 app_component_1.AppComponent

@@ -5,8 +5,22 @@
 let config = {
   host: 'http://localhost:1337',
   route: {
-    drink: {
-        list:'dish'
+
+    server: {
+      drink: {
+        list: 'dish'
+      }
+      , material: {
+        list: 'material'
+      }
+    }
+    , client: {
+      drink: {
+        list: 'drinks'
+      }
+      , material: {
+        list: 'materials'
+      }
     }
   }
 }

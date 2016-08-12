@@ -1,14 +1,19 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
-import { DrinkServices } from '../services/drinkService';
-import { Drink } from '../models/drink';
-import { ShowListComponent } from './common/showList.component';
+import { DrinkServices } from '../../services/drinkService';
+
+import { DisplayCommonDetailInfo } from '../common/displayCommonDetailInfo.component';
+
+import { Drink } from '../../models/drink';
 
 @Component({
     selector: 'drink-detail'
-    , templateUrl: 'app/templates/drinkDetail.template.html'
+    , templateUrl: 'app/templates/drink/drinkDetail.template.html'
     , providers: [
         DrinkServices
+    ]
+    , directives: [
+        DisplayCommonDetailInfo
     ]
 })
 

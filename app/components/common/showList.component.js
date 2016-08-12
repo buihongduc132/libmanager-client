@@ -19,10 +19,9 @@ var ShowListComponent = (function () {
         this.drink = new drink_1.Drink;
     }
     ShowListComponent.prototype.ngOnInit = function () {
-        this.title = "testing";
     };
     ShowListComponent.prototype.goToDetail = function (id, type) {
-        this.router.navigate(['/' + type], id);
+        this.router.navigate(['/' + type, id]);
     };
     __decorate([
         core_1.Input(), 

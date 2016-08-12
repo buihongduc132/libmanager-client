@@ -1,7 +1,11 @@
 <div>
     <h1>Welcome to LIB manager</h1>
 
-    <button class="btn btn-primary" routerLink="/drinks">Drinks</button>
-
+    
+  <nav>
+    <button RouterLinkActive="active" class="btn btn-primary" routerLink="drinks" >Drinks</button>
+    <button RouterLinkActive="active" class="btn btn-primary" routerLink="materials" routerLinkActive="active">Materias</button>
+    <button RouterLinkActive="active" disabled class="btn btn-primary" routerLink="/heroes" routerLinkActive="active">Heroes</button>
+  </nav>
     <router-outlet></router-outlet>
 </div>
