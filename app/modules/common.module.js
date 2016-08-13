@@ -10,6 +10,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var showList_component_1 = require('../components/common/showList.component');
+var displayCommonDetailInfo_component_1 = require('../components/common/displayCommonDetailInfo.component');
+// import { DrinkModule } from './drinks.module';
+// import { MaterialModule } from './materials.module';
 var CommonModule = (function () {
     function CommonModule() {
     }
@@ -17,7 +20,8 @@ var CommonModule = (function () {
         core_1.NgModule({
             imports: [],
             declarations: [
-                showList_component_1.ShowListComponent
+                showList_component_1.ShowListComponent,
+                displayCommonDetailInfo_component_1.DisplayCommonDetailInfo
             ]
         }), 
         __metadata('design:paramtypes', [])

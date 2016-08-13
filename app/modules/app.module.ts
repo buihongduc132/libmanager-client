@@ -17,8 +17,15 @@ from '../Routes/drinks.routing';
 import { materialsRouting }
 from '../Routes/materials.routing';
 
+import { CommonModule } from './common.module';
 import { DrinkModule } from './drinks.module';
 import { MaterialModule } from './materials.module';
+
+import { ShowListComponent }
+from '../components/common/showList.component';
+
+import { DisplayCommonDetailInfo }
+from '../components/common/displayCommonDetailInfo.component';
 
 import { HttpModule
     , JsonpModule
@@ -30,6 +37,9 @@ import { HttpModule
         , HttpModule
         , JsonpModule
         , routing
+        , materialsRouting
+        , drinksRouting
+        , CommonModule
         , MaterialModule
         , DrinkModule
     ]
@@ -38,6 +48,8 @@ import { HttpModule
     ]
     , declarations: [
         AppComponent
+        // , ShowListComponent
+        // , DisplayCommonDetailInfo
     ]
     , bootstrap: [
         AppComponent

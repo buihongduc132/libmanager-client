@@ -11,13 +11,9 @@ import { Config } from '../config';
 
 const appRoutes: Routes = [
     {
-        path: Config.route.client.drink.list
+        path: ''
         , component: DrinkListComponent
     }
-    // , {
-    //     path: Config.route.client.material.list
-    //     , component: MaterialListComponent
-    // }
 ];
 
 export const appRoutingProviders: any[] = [

@@ -12,6 +12,9 @@ var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
 var app_component_1 = require('../components/app.component');
 var app_routing_1 = require('../Routes/app.routing');
+var drinks_routing_1 = require('../Routes/drinks.routing');
+var materials_routing_1 = require('../Routes/materials.routing');
+var common_module_1 = require('./common.module');
 var drinks_module_1 = require('./drinks.module');
 var materials_module_1 = require('./materials.module');
 var http_1 = require('@angular/http');
@@ -25,6 +28,9 @@ var AppModule = (function () {
                 http_1.HttpModule,
                 http_1.JsonpModule,
                 app_routing_1.routing,
+                materials_routing_1.materialsRouting,
+                drinks_routing_1.drinksRouting,
+                common_module_1.CommonModule,
                 materials_module_1.MaterialModule,
                 drinks_module_1.DrinkModule
             ],

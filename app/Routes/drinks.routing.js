@@ -10,12 +10,12 @@ var drinksRoutes = [
         component: drinkRoot_component_1.DrinkRootComponent,
         children: [
             {
-                path: '',
-                component: drinklist_component_1.DrinkListComponent
-            },
-            {
                 path: ':id',
                 component: drinkDetail_component_1.DrinkDetailComponent
+            },
+            {
+                path: '',
+                component: drinklist_component_1.DrinkListComponent
             }
         ]
     }

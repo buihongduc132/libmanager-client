@@ -1,13 +1,15 @@
-import { Routes, RouterModule } 
-from '@angular/router';
+import {
+    Routes
+    , RouterModule
+} from '@angular/router';
 
-import { DrinkRootComponent } 
+import { DrinkRootComponent }
 from '../components/drink/drinkRoot.component';
 
-import { DrinkListComponent } 
+import { DrinkListComponent }
 from '../components/drink/drinklist.component';
 
-import { DrinkDetailComponent } 
+import { DrinkDetailComponent }
 from '../components/drink/drinkDetail.component';
 
 import { Config } from '../config';
@@ -18,16 +20,16 @@ const drinksRoutes: Routes = [
         , component: DrinkRootComponent
         , children: [
             {
-                path: ''
-                , component: DrinkListComponent
-            }
-            , {
                 path: ':id'
                 , component: DrinkDetailComponent
+            }
+            , {
+                path: ''
+                , component: DrinkListComponent
             }
         ]
     }
 ]
 
-export const drinksRouting = 
-RouterModule.forChild(drinksRoutes);
+export const drinksRouting =
+    RouterModule.forChild(drinksRoutes);

@@ -9,24 +9,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var materialList_component_1 = require('../components/material/materialList.component');
-var materialDetail_component_1 = require('../components/material/materialDetail.component');
-var materialRoot_component_1 = require('../components/material/materialRoot.component');
+// import { MaterialListComponent }
+// from '../components/material/materialList.component';
+// import { MaterialDetailComponent }
+// from '../components/material/materialDetail.component';
+// import { MaterialRootComponent }
+// from '../components/material/materialRoot.component';
 var materialService_1 = require('../services/materialService');
-var common_module_1 = require('./common.module');
+// import { CommonModule }
+// from './common.module';
 var MaterialModule = (function () {
     function MaterialModule() {
     }
     MaterialModule = __decorate([
         core_1.NgModule({
-            imports: [
-                common_module_1.CommonModule
-            ],
-            declarations: [
-                materialList_component_1.MaterialListComponent,
-                materialDetail_component_1.MaterialDetailComponent,
-                materialRoot_component_1.MaterialRootComponent
-            ],
+            imports: [],
+            declarations: [],
             providers: [
                 materialService_1.MaterialServices
             ]

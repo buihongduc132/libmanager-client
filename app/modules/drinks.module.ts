@@ -1,28 +1,29 @@
 import { NgModule } 
 from '@angular/core';
 
-import { DrinkRootComponent }
-from '../components/drink/drinkRoot.component';
+// import { DrinkRootComponent }
+// from '../components/drink/drinkRoot.component';
 
-import { DrinkListComponent }
-from '../components/drink/drinkList.component';
+// import { DrinkListComponent }
+// from '../components/drink/drinkList.component';
 
-import { DrinkDetailComponent }
-from '../components/drink/drinkDetail.component';
+// import { DrinkDetailComponent }
+// from '../components/drink/drinkDetail.component';
 
 import { DrinkServices }
 from '../services/drinkService';
 
-import { CommonModule }
-from './common.module';
+// import { CommonModule }
+// from './common.module';
+
 
 @NgModule({
     imports: [
-        CommonModule
+        // CommonModule
     ]
     , declarations: [
-        DrinkListComponent
-        , DrinkDetailComponent
+        // DrinkListComponent
+        // , DrinkDetailComponent
         // , DrinkRootComponent
     ]
     , providers: [

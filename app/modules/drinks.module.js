@@ -9,22 +9,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var drinkList_component_1 = require('../components/drink/drinkList.component');
-var drinkDetail_component_1 = require('../components/drink/drinkDetail.component');
+// import { DrinkRootComponent }
+// from '../components/drink/drinkRoot.component';
+// import { DrinkListComponent }
+// from '../components/drink/drinkList.component';
+// import { DrinkDetailComponent }
+// from '../components/drink/drinkDetail.component';
 var drinkService_1 = require('../services/drinkService');
-var common_module_1 = require('./common.module');
+// import { CommonModule }
+// from './common.module';
 var DrinkModule = (function () {
     function DrinkModule() {
     }
     DrinkModule = __decorate([
         core_1.NgModule({
-            imports: [
-                common_module_1.CommonModule
-            ],
-            declarations: [
-                drinkList_component_1.DrinkListComponent,
-                drinkDetail_component_1.DrinkDetailComponent
-            ],
+            imports: [],
+            declarations: [],
             providers: [
                 drinkService_1.DrinkServices
             ]
