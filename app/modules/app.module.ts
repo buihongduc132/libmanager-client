@@ -9,10 +9,10 @@ from '../components/app.component';
 
 import { routing
     , appRoutingProviders
- } from '../Routes/app.routing';
+} from '../Routes/app.routing';
 
- import { drinksRouting }
- from '../Routes/drinks.routing';
+import { drinksRouting }
+from '../Routes/drinks.routing';
 
 import { materialsRouting }
 from '../Routes/materials.routing';
@@ -24,7 +24,6 @@ import { HttpModule
     , JsonpModule
 } from '@angular/http';
 
-
 @NgModule({
     imports: [
         BrowserModule
@@ -34,7 +33,7 @@ import { HttpModule
         , MaterialModule
         , DrinkModule
     ]
-    , providers: [  
+    , providers: [
         appRoutingProviders
     ]
     , declarations: [

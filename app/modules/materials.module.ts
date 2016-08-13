@@ -1,29 +1,29 @@
 import { NgModule }
 from '@angular/core';
 
-import { CommonModule }
-from '@angular/common';
-
 import { MaterialListComponent }
 from '../components/material/materialList.component';
 
 import { MaterialDetailComponent }
 from '../components/material/materialDetail.component';
 
+import { MaterialRootComponent }
+from '../components/material/materialRoot.component';
+
 import { MaterialServices }
 from '../services/materialService';
 
-import { ShowListComponent }
-from '../components/common/showList.component';
+import { CommonModule }
+from './common.module';
 
 @NgModule({
     imports: [
-
+        CommonModule
     ]
     , declarations: [
         MaterialListComponent
         , MaterialDetailComponent
-        , ShowListComponent
+        , MaterialRootComponent
     ]
     , providers: [
         MaterialServices

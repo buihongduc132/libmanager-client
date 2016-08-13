@@ -6,10 +6,14 @@ import { ShowListComponent } from '../common/showList.component';
 
 import { Config } from '../../config';
 
+// import { CommonModule } from '../../modules/common.module';
+
 @Component({
     selector: 'drink-list'
     , templateUrl: 'app/templates/drink/drinkList.template.html'
-
+    // , directives: [
+    //     CommonModule
+    // ]
 })
 
 export class DrinkListComponent implements OnInit {

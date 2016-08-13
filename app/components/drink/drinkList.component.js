@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var drinkService_1 = require('../../services/drinkService');
 var config_1 = require('../../config');
+// import { CommonModule } from '../../modules/common.module';
 var DrinkListComponent = (function () {
     function DrinkListComponent(drinkServices) {
         this.drinkServices = drinkServices;

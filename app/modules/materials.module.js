@@ -11,18 +11,21 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var materialList_component_1 = require('../components/material/materialList.component');
 var materialDetail_component_1 = require('../components/material/materialDetail.component');
+var materialRoot_component_1 = require('../components/material/materialRoot.component');
 var materialService_1 = require('../services/materialService');
-var showList_component_1 = require('../components/common/showList.component');
+var common_module_1 = require('./common.module');
 var MaterialModule = (function () {
     function MaterialModule() {
     }
     MaterialModule = __decorate([
         core_1.NgModule({
-            imports: [],
+            imports: [
+                common_module_1.CommonModule
+            ],
             declarations: [
                 materialList_component_1.MaterialListComponent,
                 materialDetail_component_1.MaterialDetailComponent,
-                showList_component_1.ShowListComponent
+                materialRoot_component_1.MaterialRootComponent
             ],
             providers: [
                 materialService_1.MaterialServices

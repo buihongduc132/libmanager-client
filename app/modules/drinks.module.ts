@@ -1,8 +1,8 @@
 import { NgModule } 
 from '@angular/core';
 
-import { CommonModule } 
-from '@angular/common';
+import { DrinkRootComponent }
+from '../components/drink/drinkRoot.component';
 
 import { DrinkListComponent }
 from '../components/drink/drinkList.component';
@@ -13,17 +13,17 @@ from '../components/drink/drinkDetail.component';
 import { DrinkServices }
 from '../services/drinkService';
 
-import { ShowListComponent } 
-from '../components/common/showList.component';
+import { CommonModule }
+from './common.module';
 
 @NgModule({
     imports: [
-
+        CommonModule
     ]
     , declarations: [
         DrinkListComponent
         , DrinkDetailComponent
-        , ShowListComponent
+        // , DrinkRootComponent
     ]
     , providers: [
         DrinkServices
