@@ -1,6 +1,9 @@
 import { Routes, RouterModule } 
 from '@angular/router';
 
+import { DrinkRootComponent } 
+from '../components/drink/drinkRoot.component';
+
 import { DrinkListComponent } 
 from '../components/drink/drinklist.component';
 
@@ -12,11 +15,17 @@ import { Config } from '../config';
 const drinksRoutes: Routes = [
     {
         path: Config.route.client.drink.list
-        , component: DrinkListComponent
-    }
-    , {
-        path: `${Config.route.client.drink.list}/:id`
-        , component: DrinkDetailComponent
+        , component: DrinkRootComponent
+        , children: [
+            {
+                path: ''
+                , component: DrinkListComponent
+            }
+            , {
+                path: ':id'
+                , component: DrinkDetailComponent
+            }
+        ]
     }
 ]
 

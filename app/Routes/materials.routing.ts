@@ -9,18 +9,27 @@ from '../components/material/materialList.component';
 import { MaterialDetailComponent }
 from '../components/material/materialDetail.component';
 
+import { MaterialRootComponent }
+from '../components/material/materialRoot.component';
+
 import { Config } from '../config';
 
 const materialsRoutes: Routes = [
     {
         path: Config.route.client.material.list
-        , component: MaterialListComponent
-    }
-    , {
-        path: `${Config.route.client.material.list}/:id`
-        , component: MaterialDetailComponent
+        , component: MaterialRootComponent
+        , children: [
+            {
+                path: ':id'
+                , component: MaterialDetailComponent
+            }
+            , {
+                path: ''
+                , component: MaterialListComponent
+            }
+        ]
     }
 ]
 
-export const materialsRouting = 
-RouterModule.forChild(materialsRoutes);
+export const materialsRouting =
+    RouterModule.forChild(materialsRoutes);

@@ -7,18 +7,6 @@ from '@angular/platform-browser';
 import { AppComponent }
 from '../components/app.component';
 
-import { DrinkListComponent } 
-from '../components/drink/drinkList.component';
-
-import { DrinkDetailComponent } 
-from '../components/drink/drinkDetail.component';
-
-import { MaterialListComponent }
-from '../components/material/materialList.component';
-
-import { ShowListComponent } 
-from '../components/common/showList.component';
-
 import { routing
     , appRoutingProviders
  } from '../Routes/app.routing';
@@ -28,6 +16,9 @@ import { routing
 
 import { materialsRouting }
 from '../Routes/materials.routing';
+
+import { DrinkModule } from './drinks.module';
+import { MaterialModule } from './materials.module';
 
 import { HttpModule
     , JsonpModule
@@ -40,22 +31,17 @@ import { HttpModule
         , HttpModule
         , JsonpModule
         , routing
-        , drinksRouting
-        , materialsRouting
+        , MaterialModule
+        , DrinkModule
     ]
     , providers: [  
         appRoutingProviders
     ]
     , declarations: [
         AppComponent
-        , DrinkListComponent
-        , DrinkDetailComponent
-        , ShowListComponent
-        , MaterialListComponent
     ]
     , bootstrap: [
         AppComponent
-
     ]
 })
 

@@ -9,7 +9,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var showList_component_1 = require('../common/showList.component');
 var materialService_1 = require('../../services/materialService');
 var config_1 = require('../../config');
 var MaterialListComponent = (function () {
@@ -29,13 +28,7 @@ var MaterialListComponent = (function () {
     MaterialListComponent = __decorate([
         core_1.Component({
             selector: 'material-list',
-            templateUrl: 'app/templates/material/materialList.template.html',
-            providers: [
-                materialService_1.MaterialServices
-            ],
-            directives: [
-                showList_component_1.ShowListComponent
-            ]
+            templateUrl: 'app/templates/material/materialList.template.html'
         }), 
         __metadata('design:paramtypes', [materialService_1.MaterialServices])
     ], MaterialListComponent);

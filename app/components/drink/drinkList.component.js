@@ -10,7 +10,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var drinkService_1 = require('../../services/drinkService');
-var showList_component_1 = require('../common/showList.component');
 var config_1 = require('../../config');
 var DrinkListComponent = (function () {
     function DrinkListComponent(drinkServices) {
@@ -32,17 +31,11 @@ var DrinkListComponent = (function () {
     DrinkListComponent = __decorate([
         core_1.Component({
             selector: 'drink-list',
-            templateUrl: 'app/templates/drink/drinkList.template.html',
-            directives: [
-                showList_component_1.ShowListComponent
-            ],
-            providers: [
-                drinkService_1.DrinkServices
-            ]
+            templateUrl: 'app/templates/drink/drinkList.template.html'
         }), 
         __metadata('design:paramtypes', [drinkService_1.DrinkServices])
     ], DrinkListComponent);
     return DrinkListComponent;
 }());
 exports.DrinkListComponent = DrinkListComponent;
-//# sourceMappingURL=drinklist.component.js.map
+//# sourceMappingURL=drinkList.component.js.map

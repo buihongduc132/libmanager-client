@@ -10,7 +10,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var drinkService_1 = require('../../services/drinkService');
-var displayCommonDetailInfo_component_1 = require('../common/displayCommonDetailInfo.component');
 var drink_1 = require('../../models/drink');
 var DrinkDetailComponent = (function () {
     function DrinkDetailComponent(drinkServices) {
@@ -30,13 +29,7 @@ var DrinkDetailComponent = (function () {
     DrinkDetailComponent = __decorate([
         core_1.Component({
             selector: 'drink-detail',
-            templateUrl: 'app/templates/drink/drinkDetail.template.html',
-            providers: [
-                drinkService_1.DrinkServices
-            ],
-            directives: [
-                displayCommonDetailInfo_component_1.DisplayCommonDetailInfo
-            ]
+            templateUrl: 'app/templates/drink/drinkDetail.template.html'
         }), 
         __metadata('design:paramtypes', [drinkService_1.DrinkServices])
     ], DrinkDetailComponent);

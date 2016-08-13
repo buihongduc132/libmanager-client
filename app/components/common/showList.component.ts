@@ -11,8 +11,8 @@ from '@angular/router';
 
 @Component({
     selector: 'show-list',
-    templateUrl: 'app/templates/common/showList.template.html',
-    providers: [
+    templateUrl: 'app/templates/common/showList.template.html'
+    , providers: [
         CommonServices
     ]
 })

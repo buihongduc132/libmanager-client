@@ -9,12 +9,7 @@ import { Config } from '../../config';
 @Component({
     selector: 'drink-list'
     , templateUrl: 'app/templates/drink/drinkList.template.html'
-    , directives: [
-        ShowListComponent
-    ]
-    , providers: [
-        DrinkServices
-    ]
+
 })
 
 export class DrinkListComponent implements OnInit {

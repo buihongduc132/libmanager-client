@@ -11,7 +11,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
 var material_1 = require('../../models/material');
-var displayCommonDetailInfo_component_1 = require('../common/displayCommonDetailInfo.component');
 var materialService_1 = require('../../services/materialService');
 require('rxjs/add/operator/map');
 var MaterialDetailComponent = (function () {
@@ -35,13 +34,7 @@ var MaterialDetailComponent = (function () {
     MaterialDetailComponent = __decorate([
         core_1.Component({
             selector: 'material-detail',
-            templateUrl: 'app/templates/material/materialDetail.template.html',
-            providers: [
-                materialService_1.MaterialServices
-            ],
-            directives: [
-                displayCommonDetailInfo_component_1.DisplayCommonDetailInfo
-            ]
+            templateUrl: 'app/templates/material/materialDetail.template.html'
         }), 
         __metadata('design:paramtypes', [materialService_1.MaterialServices, router_1.ActivatedRoute])
     ], MaterialDetailComponent);

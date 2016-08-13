@@ -14,12 +14,7 @@ import 'rxjs/add/operator/map';
 @Component({
     selector: 'material-detail'
     , templateUrl: 'app/templates/material/materialDetail.template.html'
-    , providers: [
-        MaterialServices
-    ]
-    , directives: [
-        DisplayCommonDetailInfo
-    ]
+
 })
 
 export class MaterialDetailComponent implements OnInit, OnDestroy {

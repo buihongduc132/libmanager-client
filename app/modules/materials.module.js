@@ -9,28 +9,28 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var drinkList_component_1 = require('../components/drink/drinkList.component');
-var drinkDetail_component_1 = require('../components/drink/drinkDetail.component');
-var drinkService_1 = require('../services/drinkService');
+var materialList_component_1 = require('../components/material/materialList.component');
+var materialDetail_component_1 = require('../components/material/materialDetail.component');
+var materialService_1 = require('../services/materialService');
 var showList_component_1 = require('../components/common/showList.component');
-var DrinkModule = (function () {
-    function DrinkModule() {
+var MaterialModule = (function () {
+    function MaterialModule() {
     }
-    DrinkModule = __decorate([
+    MaterialModule = __decorate([
         core_1.NgModule({
             imports: [],
             declarations: [
-                drinkList_component_1.DrinkListComponent,
-                drinkDetail_component_1.DrinkDetailComponent,
+                materialList_component_1.MaterialListComponent,
+                materialDetail_component_1.MaterialDetailComponent,
                 showList_component_1.ShowListComponent
             ],
             providers: [
-                drinkService_1.DrinkServices
+                materialService_1.MaterialServices
             ]
         }), 
         __metadata('design:paramtypes', [])
-    ], DrinkModule);
-    return DrinkModule;
+    ], MaterialModule);
+    return MaterialModule;
 }());
-exports.DrinkModule = DrinkModule;
-//# sourceMappingURL=drinks.module.js.map
+exports.MaterialModule = MaterialModule;
+//# sourceMappingURL=materials.module.js.map

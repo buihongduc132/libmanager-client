@@ -12,12 +12,6 @@ import { Config } from '../../config';
 @Component({
     selector: 'material-list'
     , templateUrl: 'app/templates/material/materialList.template.html'
-    , providers: [
-        MaterialServices
-    ]
-    , directives: [
-        ShowListComponent
-    ]
 })
 
 export class MaterialListComponent implements OnInit, OnDestroy {

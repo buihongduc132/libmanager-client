@@ -12,13 +12,7 @@ import { Config } from '../config';
 
 @Component( {
     selector: 'lib-app',
-    templateUrl: 'app/templates/app.template.html',
-    directives: [
-        // ROUTER_DIRECTIVES
-    ],
-    providers: [
-        // DrinkServices
-    ]
+    templateUrl: 'app/templates/app.template.html'
 })
 
 export class AppComponent {

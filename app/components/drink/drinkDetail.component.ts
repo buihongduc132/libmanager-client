@@ -9,12 +9,7 @@ import { Drink } from '../../models/drink';
 @Component({
     selector: 'drink-detail'
     , templateUrl: 'app/templates/drink/drinkDetail.template.html'
-    , providers: [
-        DrinkServices
-    ]
-    , directives: [
-        DisplayCommonDetailInfo
-    ]
+
 })
 
 export class DrinkDetailComponent implements OnInit, OnDestroy {
