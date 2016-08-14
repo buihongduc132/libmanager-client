@@ -4,6 +4,8 @@ from '@angular/core';
 import { BrowserModule }
 from '@angular/platform-browser';
 
+import { FormsModule }   from '@angular/forms';
+
 import { AppComponent }
 from '../components/app.component';
 
@@ -17,7 +19,6 @@ from '../Routes/drinks.routing';
 import { materialsRouting }
 from '../Routes/materials.routing';
 
-import { CommonModule } from './common.module';
 import { DrinkModule } from './drinks.module';
 import { MaterialModule } from './materials.module';
 
@@ -26,6 +27,9 @@ from '../components/common/showList.component';
 
 import { DisplayCommonDetailInfo }
 from '../components/common/displayCommonDetailInfo.component';
+
+import { ListSkeletonComponent }
+from '../components/common/listSkeleton.component';
 
 import { HttpModule
     , JsonpModule
@@ -36,10 +40,12 @@ import { HttpModule
         BrowserModule
         , HttpModule
         , JsonpModule
+        , FormsModule
+
         , routing
         , materialsRouting
         , drinksRouting
-        , CommonModule
+        
         , MaterialModule
         , DrinkModule
     ]
@@ -48,8 +54,9 @@ import { HttpModule
     ]
     , declarations: [
         AppComponent
-        // , ShowListComponent
-        // , DisplayCommonDetailInfo
+        , ShowListComponent
+        , DisplayCommonDetailInfo
+        , ListSkeletonComponent
     ]
     , bootstrap: [
         AppComponent

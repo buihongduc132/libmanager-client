@@ -21,7 +21,13 @@ var MaterialDetailComponent = (function () {
     }
     // private sub: Subc
     MaterialDetailComponent.prototype.ngOnInit = function () {
-        this.getMaterialDetail(1);
+        var _this = this;
+        this.sub = this.route
+            .params.subscribe(function (params) {
+            var id = +params['id'];
+            _this.id = id;
+            _this.getMaterialDetail(_this.id);
+        });
     };
     MaterialDetailComponent.prototype.getMaterialDetail = function (id) {
         var _this = this;

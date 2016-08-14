@@ -18,6 +18,7 @@ var DrinkListComponent = (function () {
         this.drinks = new Array();
         this.showProperties = [];
         this.type = config_1.Config.route.client.drink.list;
+        this.title = "LIB Drinks";
     }
     DrinkListComponent.prototype.ngOnDestroy = function () {
     };

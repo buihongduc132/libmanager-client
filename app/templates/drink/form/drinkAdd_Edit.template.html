@@ -1,0 +1,32 @@
+<div class="container">
+
+    <div class="row">
+        <button (click)="goBack()" class="button-in-title btn btn-info col-xs-2">
+    <span class="glyphicon glyphicon-chevron-left"></span>
+    Back
+    </button>
+        <h2 class="col-xs-10">Form</h2>
+    </div>
+
+    <div class="row">
+
+        <form>
+            <label for="name">Name:</label>
+            <input type="text" class="form-control" id="name" required>
+
+            <label for="materials">Choose Materials:</label>
+            <select id="materials" class="form-control">
+                <option *ngFor="let material of materials"
+                (click)="chooseMaterial(material.id)">
+                    {{ material.name }}
+                </option>
+            </select>
+        </form>
+
+        <div *ngFor="let chosenMaterial of chosenMaterials">
+            {{ chosenMaterial.name }}
+        </div>
+
+        <button class="btn btn-success">Submit</button>
+    </div>
+</div>

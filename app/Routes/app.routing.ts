@@ -12,7 +12,9 @@ import { Config } from '../config';
 const appRoutes: Routes = [
     {
         path: ''
-        , component: DrinkListComponent
+        // , component: DrinkListComponent
+        , redirectTo: '/drinks'
+        , pathMatch: 'full'
     }
 ];
 

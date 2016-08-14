@@ -9,15 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-// import { MaterialListComponent }
-// from '../components/material/materialList.component';
-// import { MaterialDetailComponent }
-// from '../components/material/materialDetail.component';
-// import { MaterialRootComponent }
-// from '../components/material/materialRoot.component';
 var materialService_1 = require('../services/materialService');
-// import { CommonModule }
-// from './common.module';
 var MaterialModule = (function () {
     function MaterialModule() {
     }

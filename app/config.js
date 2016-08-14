@@ -19,6 +19,10 @@ var config = {
             },
             material: {
                 list: 'materials'
+            },
+            commonAction: {
+                add: 'add',
+                edit: 'edit'
             }
         }
     }

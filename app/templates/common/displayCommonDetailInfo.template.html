@@ -1,3 +1,11 @@
-<h1>{{ item.name }}</h1>
+<div class="row">
+    <button
+    (click)="goBack()" 
+    class="button-in-title btn btn-info col-xs-1">
+    <span class="glyphicon glyphicon-chevron-left"></span>
+    Back
+    </button>
+    <h2 class="col-xs-11">{{ item.name }}</h2>
+</div>
 
 <h2 [hidden]="!showPrice">{{ item.price }}</h2>

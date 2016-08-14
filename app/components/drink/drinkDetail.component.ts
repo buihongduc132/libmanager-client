@@ -6,6 +6,8 @@ import { DisplayCommonDetailInfo } from '../common/displayCommonDetailInfo.compo
 
 import { Drink } from '../../models/drink';
 
+import { ActivatedRoute } from '@angular/router';
+
 @Component({
     selector: 'drink-detail'
     , templateUrl: 'app/templates/drink/drinkDetail.template.html'
@@ -13,15 +15,26 @@ import { Drink } from '../../models/drink';
 })
 
 export class DrinkDetailComponent implements OnInit, OnDestroy {
-    constructor( private drinkServices: DrinkServices) {
+    constructor(
+        private drinkServices: DrinkServices
+        , private route: ActivatedRoute) {
 
     }
 
     drink: Drink = new Drink;
     errorMessage: any;
+    id: any;
+    sub: any;
 
     ngOnInit() {
-        this.getDrinkDetail(1);
+        this.sub = this.route
+        .params.subscribe(
+            params => {
+                let id = +params['id'];
+                this.id = id;
+                this.getDrinkDetail(this.id);
+            }
+        );
     }
 
     getDrinkDetail(id: number) {

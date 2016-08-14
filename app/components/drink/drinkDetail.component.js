@@ -11,13 +11,21 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var drinkService_1 = require('../../services/drinkService');
 var drink_1 = require('../../models/drink');
+var router_1 = require('@angular/router');
 var DrinkDetailComponent = (function () {
-    function DrinkDetailComponent(drinkServices) {
+    function DrinkDetailComponent(drinkServices, route) {
         this.drinkServices = drinkServices;
+        this.route = route;
         this.drink = new drink_1.Drink;
     }
     DrinkDetailComponent.prototype.ngOnInit = function () {
-        this.getDrinkDetail(1);
+        var _this = this;
+        this.sub = this.route
+            .params.subscribe(function (params) {
+            var id = +params['id'];
+            _this.id = id;
+            _this.getDrinkDetail(_this.id);
+        });
     };
     DrinkDetailComponent.prototype.getDrinkDetail = function (id) {
         var _this = this;
@@ -31,7 +39,7 @@ var DrinkDetailComponent = (function () {
             selector: 'drink-detail',
             templateUrl: 'app/templates/drink/drinkDetail.template.html'
         }), 
-        __metadata('design:paramtypes', [drinkService_1.DrinkServices])
+        __metadata('design:paramtypes', [drinkService_1.DrinkServices, router_1.ActivatedRoute])
     ], DrinkDetailComponent);
     return DrinkDetailComponent;
 }());

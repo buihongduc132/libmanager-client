@@ -15,6 +15,9 @@ var Utils = (function () {
         if (digits === void 0) { digits = 10; }
         return Math.floor(Math.random() * Math.pow(10, digits));
     };
+    Utils.goBack = function () {
+        window.history.back();
+    };
     return Utils;
 }());
 exports.Utils = Utils;

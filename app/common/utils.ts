@@ -14,6 +14,9 @@ export class Utils {
 
     static RandomInt = function (digits: number = 10) {
         return Math.floor(Math.random() * Math.pow(10, digits));
-    };
+    }
 
+    public static goBack = function() {
+        window.history.back();
+    }
 }

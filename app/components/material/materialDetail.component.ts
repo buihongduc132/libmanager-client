@@ -27,11 +27,19 @@ export class MaterialDetailComponent implements OnInit, OnDestroy {
 
     private material: Material = new Material;
     private errorMessage: any;
-    private selectedId: number;
+    private sub: any;
+    private id: number;
     // private sub: Subc
 
     ngOnInit() {
-        this.getMaterialDetail(1);
+        this.sub = this.route
+        .params.subscribe(
+            params => {
+                let id = +params['id'];
+                this.id = id;
+                this.getMaterialDetail(this.id);
+            }
+        );
     }
 
     getMaterialDetail(id: number) {

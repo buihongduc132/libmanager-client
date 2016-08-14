@@ -1,10 +1,10 @@
 "use strict";
 var router_1 = require('@angular/router');
-var drinklist_component_1 = require('../components/drink/drinklist.component');
 var appRoutes = [
     {
         path: '',
-        component: drinklist_component_1.DrinkListComponent
+        redirectTo: '/drinks',
+        pathMatch: 'full'
     }
 ];
 exports.appRoutingProviders = [];

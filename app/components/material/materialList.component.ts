@@ -15,7 +15,7 @@ import { Config } from '../../config';
 })
 
 export class MaterialListComponent implements OnInit, OnDestroy {
-    constructor (
+    constructor(
         private materialServices: MaterialServices
     ) {
 
@@ -25,13 +25,14 @@ export class MaterialListComponent implements OnInit, OnDestroy {
     errorMessage: any;
     type: string = Config.route.client.material.list;
     showProperties: string[] = [];
+    title: string = "LIB Materials";
 
     ngOnInit() {
         this.materialServices.getMaterials()
-        .subscribe(
+            .subscribe(
             materials => this.materials = materials,
             error => this.errorMessage = error
-        )
+            )
     }
 
     ngOnDestroy() {

@@ -17,6 +17,7 @@ var MaterialListComponent = (function () {
         this.materials = new Array();
         this.type = config_1.Config.route.client.material.list;
         this.showProperties = [];
+        this.title = "LIB Materials";
     }
     MaterialListComponent.prototype.ngOnInit = function () {
         var _this = this;

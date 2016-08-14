@@ -9,24 +9,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var showList_component_1 = require('../components/common/showList.component');
-var displayCommonDetailInfo_component_1 = require('../components/common/displayCommonDetailInfo.component');
-// import { DrinkModule } from './drinks.module';
-// import { MaterialModule } from './materials.module';
-var CommonModule = (function () {
-    function CommonModule() {
+var DrinkAddEditComponent = (function () {
+    function DrinkAddEditComponent() {
     }
-    CommonModule = __decorate([
-        core_1.NgModule({
-            imports: [],
-            declarations: [
-                showList_component_1.ShowListComponent,
-                displayCommonDetailInfo_component_1.DisplayCommonDetailInfo
-            ]
+    DrinkAddEditComponent = __decorate([
+        core_1.Component({
+            selector: 'drink-add-edit',
+            templateUrl: 'app/templates/drink/form/drinkAdd_Edit.template.html'
         }), 
         __metadata('design:paramtypes', [])
-    ], CommonModule);
-    return CommonModule;
+    ], DrinkAddEditComponent);
+    return DrinkAddEditComponent;
 }());
-exports.CommonModule = CommonModule;
-//# sourceMappingURL=common.module.js.map
+exports.DrinkAddEditComponent = DrinkAddEditComponent;
+//# sourceMappingURL=drinkAdd_Edit.component.js.map

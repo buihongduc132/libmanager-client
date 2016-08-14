@@ -9,15 +9,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-// import { DrinkRootComponent }
-// from '../components/drink/drinkRoot.component';
-// import { DrinkListComponent }
-// from '../components/drink/drinkList.component';
-// import { DrinkDetailComponent }
-// from '../components/drink/drinkDetail.component';
 var drinkService_1 = require('../services/drinkService');
-// import { CommonModule }
-// from './common.module';
+var materialService_1 = require('../services/materialService');
 var DrinkModule = (function () {
     function DrinkModule() {
     }
@@ -26,7 +19,8 @@ var DrinkModule = (function () {
             imports: [],
             declarations: [],
             providers: [
-                drinkService_1.DrinkServices
+                drinkService_1.DrinkServices,
+                materialService_1.MaterialServices
             ]
         }), 
         __metadata('design:paramtypes', [])

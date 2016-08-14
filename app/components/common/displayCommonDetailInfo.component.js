@@ -9,9 +9,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var utils_1 = require('../../common/utils');
 var DisplayCommonDetailInfo = (function () {
     function DisplayCommonDetailInfo() {
     }
+    DisplayCommonDetailInfo.prototype.goBack = function () {
+        utils_1.Utils.goBack();
+    };
     DisplayCommonDetailInfo.prototype.showPrice = function () {
         return this.item.price !== undefined;
     };

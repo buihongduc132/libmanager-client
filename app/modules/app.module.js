@@ -10,13 +10,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
+var forms_1 = require('@angular/forms');
 var app_component_1 = require('../components/app.component');
 var app_routing_1 = require('../Routes/app.routing');
 var drinks_routing_1 = require('../Routes/drinks.routing');
 var materials_routing_1 = require('../Routes/materials.routing');
-var common_module_1 = require('./common.module');
 var drinks_module_1 = require('./drinks.module');
 var materials_module_1 = require('./materials.module');
+var showList_component_1 = require('../components/common/showList.component');
+var displayCommonDetailInfo_component_1 = require('../components/common/displayCommonDetailInfo.component');
+var listSkeleton_component_1 = require('../components/common/listSkeleton.component');
 var http_1 = require('@angular/http');
 var AppModule = (function () {
     function AppModule() {
@@ -27,10 +30,10 @@ var AppModule = (function () {
                 platform_browser_1.BrowserModule,
                 http_1.HttpModule,
                 http_1.JsonpModule,
+                forms_1.FormsModule,
                 app_routing_1.routing,
                 materials_routing_1.materialsRouting,
                 drinks_routing_1.drinksRouting,
-                common_module_1.CommonModule,
                 materials_module_1.MaterialModule,
                 drinks_module_1.DrinkModule
             ],
@@ -38,7 +41,10 @@ var AppModule = (function () {
                 app_routing_1.appRoutingProviders
             ],
             declarations: [
-                app_component_1.AppComponent
+                app_component_1.AppComponent,
+                showList_component_1.ShowListComponent,
+                displayCommonDetailInfo_component_1.DisplayCommonDetailInfo,
+                listSkeleton_component_1.ListSkeletonComponent
             ],
             bootstrap: [
                 app_component_1.AppComponent

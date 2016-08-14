@@ -1,33 +1,21 @@
 import { NgModule } 
 from '@angular/core';
 
-// import { DrinkRootComponent }
-// from '../components/drink/drinkRoot.component';
-
-// import { DrinkListComponent }
-// from '../components/drink/drinkList.component';
-
-// import { DrinkDetailComponent }
-// from '../components/drink/drinkDetail.component';
-
 import { DrinkServices }
 from '../services/drinkService';
 
-// import { CommonModule }
-// from './common.module';
-
+import { MaterialServices }
+from '../services/materialService';
 
 @NgModule({
     imports: [
-        // CommonModule
     ]
     , declarations: [
-        // DrinkListComponent
-        // , DrinkDetailComponent
-        // , DrinkRootComponent
+
     ]
     , providers: [
         DrinkServices
+        , MaterialServices
     ]
 })
 
