@@ -9,9 +9,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var router_1 = require('@angular/router');
 var ListSkeletonComponent = (function () {
-    function ListSkeletonComponent() {
+    function ListSkeletonComponent(router) {
+        this.router = router;
     }
+    ListSkeletonComponent.prototype.goToAdd = function () {
+        // this.router.navigate(['/add']);
+    };
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Array)
@@ -35,9 +40,9 @@ var ListSkeletonComponent = (function () {
     ListSkeletonComponent = __decorate([
         core_1.Component({
             selector: 'list-skeleton',
-            templateUrl: 'app/templates/common/listSkeleton.component'
+            templateUrl: 'app/templates/common/listSkeleton.template.html'
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [router_1.Router])
     ], ListSkeletonComponent);
     return ListSkeletonComponent;
 }());

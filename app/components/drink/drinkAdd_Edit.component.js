@@ -9,15 +9,48 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var utils_1 = require('../../common/utils');
+var drinkService_1 = require('../../services/drinkService');
+var materialService_1 = require('../../services/materialService');
+var _ = require('lodash');
 var DrinkAddEditComponent = (function () {
-    function DrinkAddEditComponent() {
+    function DrinkAddEditComponent(drinkServices, materialServices) {
+        this.drinkServices = drinkServices;
+        this.materialServices = materialServices;
+        this.chosenMaterials = new Array();
     }
+    DrinkAddEditComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.materialServices.getMaterials()
+            .subscribe(function (materials) { return _this.materials = materials; }, function (error) { return _this.errorMessage = error; });
+    };
+    DrinkAddEditComponent.prototype.chooseMaterial = function (id) {
+        var matIndex = _.findIndex(this.materials, function (e) {
+            return e.id == id;
+        });
+        if (this.materials[matIndex]) {
+            this.chosenMaterials.push(this.materials[matIndex]);
+            this.materials.splice(matIndex, 1);
+        }
+    };
+    DrinkAddEditComponent.prototype.removeMaterial = function (id) {
+        var matIndex = _.findIndex(this.chosenMaterials, function (e) {
+            return e.id == id;
+        });
+        if (this.chosenMaterials[matIndex]) {
+            this.materials.push(this.chosenMaterials[matIndex]);
+            this.chosenMaterials.splice(matIndex, 1);
+        }
+    };
+    DrinkAddEditComponent.prototype.goBack = function () {
+        utils_1.Utils.goBack();
+    };
     DrinkAddEditComponent = __decorate([
         core_1.Component({
             selector: 'drink-add-edit',
             templateUrl: 'app/templates/drink/form/drinkAdd_Edit.template.html'
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [drinkService_1.DrinkServices, materialService_1.MaterialServices])
     ], DrinkAddEditComponent);
     return DrinkAddEditComponent;
 }());

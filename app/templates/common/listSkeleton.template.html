@@ -1,0 +1,8 @@
+<div class="row">
+
+    <h2 class="col-xs-10">{{ title }}</h2>
+
+    <button [routerLink]="['add']" class="button-in-title col-xs-2 btn btn-success">Add</button>
+</div>
+
+<show-list [type]="type" [items]="items" [showProperties]="showProperties" [showPrice]="true"></show-list>

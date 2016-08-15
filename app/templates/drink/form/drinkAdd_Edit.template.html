@@ -15,16 +15,21 @@
             <input type="text" class="form-control" id="name" required>
 
             <label for="materials">Choose Materials:</label>
-            <select id="materials" class="form-control">
+            <select (change)="chooseMaterial($event.target.value)" id="materials" class="form-control">
+                <option>Please choose a Material</option>
                 <option *ngFor="let material of materials"
-                (click)="chooseMaterial(material.id)">
+                [value]="material.id">
                     {{ material.name }}
                 </option>
             </select>
         </form>
 
-        <div *ngFor="let chosenMaterial of chosenMaterials">
-            {{ chosenMaterial.name }}
+        <div class="row">
+            <div class="col-xs-3" *ngFor="let chosenMaterial of chosenMaterials">
+                <span class="btn btn-info" (click)="removeMaterial(chosenMaterial.id)" >
+                {{ chosenMaterial.name }}
+                </span>
+            </div>
         </div>
 
         <button class="btn btn-success">Submit</button>

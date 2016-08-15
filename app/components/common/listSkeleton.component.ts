@@ -1,8 +1,12 @@
 import { Component, Input } from '@angular/core';
 
+import { Router } from '@angular/router';
+
+import { Config } from '../../config';
+
 @Component({
     selector: 'list-skeleton'
-    , templateUrl: 'app/templates/common/listSkeleton.component'
+    , templateUrl: 'app/templates/common/listSkeleton.template.html'
 })
 
 export class ListSkeletonComponent {
@@ -11,4 +15,14 @@ export class ListSkeletonComponent {
     @Input() showPrice: boolean;
     @Input() type: string;
     @Input() title: string;
+
+    constructor(
+        private router: Router
+    ) {
+
+    }
+
+    goToAdd() {
+        // this.router.navigate(['/add']);
+    }
 }

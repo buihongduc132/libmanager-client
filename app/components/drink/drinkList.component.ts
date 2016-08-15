@@ -27,6 +27,7 @@ export class DrinkListComponent implements OnInit {
     errorMessage: any;
     type: string = Config.route.client.drink.list;
     title: string = "LIB Drinks";
+    sub: any;
 
     ngOnDestroy() {
 
