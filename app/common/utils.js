@@ -18,6 +18,10 @@ var Utils = (function () {
     Utils.goBack = function () {
         window.history.back();
     };
+    Utils.getResponsiveClass = function (width, size) {
+        if (size === void 0) { size = 'xs'; }
+        return "col-" + size + "-" + width;
+    };
     return Utils;
 }());
 exports.Utils = Utils;

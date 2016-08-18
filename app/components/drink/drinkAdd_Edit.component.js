@@ -9,6 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var drink_1 = require('../../models/drink');
 var utils_1 = require('../../common/utils');
 var drinkService_1 = require('../../services/drinkService');
 var materialService_1 = require('../../services/materialService');
@@ -17,12 +18,26 @@ var DrinkAddEditComponent = (function () {
     function DrinkAddEditComponent(drinkServices, materialServices) {
         this.drinkServices = drinkServices;
         this.materialServices = materialServices;
+        this.drink = new drink_1.Drink();
+        this.parentDrinks = new Array();
         this.chosenMaterials = new Array();
     }
     DrinkAddEditComponent.prototype.ngOnInit = function () {
+        this.getMaterials();
+        this.getDrinks();
+    };
+    DrinkAddEditComponent.prototype.getMaterials = function () {
         var _this = this;
         this.materialServices.getMaterials()
             .subscribe(function (materials) { return _this.materials = materials; }, function (error) { return _this.errorMessage = error; });
+    };
+    DrinkAddEditComponent.prototype.getDrinks = function () {
+        var _this = this;
+        this.drinkServices.getDrinks()
+            .subscribe(function (drinks) { return _this.parentDrinks = drinks; }, function (error) { return _this.errorMessage = error; });
+    };
+    DrinkAddEditComponent.prototype.onItemAdded = function (id) {
+        this.chooseMaterial(id);
     };
     DrinkAddEditComponent.prototype.chooseMaterial = function (id) {
         var matIndex = _.findIndex(this.materials, function (e) {
@@ -33,7 +48,7 @@ var DrinkAddEditComponent = (function () {
             this.materials.splice(matIndex, 1);
         }
     };
-    DrinkAddEditComponent.prototype.removeMaterial = function (id) {
+    DrinkAddEditComponent.prototype.removeMaterialFromChosen = function (id) {
         var matIndex = _.findIndex(this.chosenMaterials, function (e) {
             return e.id == id;
         });

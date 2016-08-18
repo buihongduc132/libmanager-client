@@ -20,6 +20,7 @@ var materials_module_1 = require('./materials.module');
 var showList_component_1 = require('../components/common/showList.component');
 var displayCommonDetailInfo_component_1 = require('../components/common/displayCommonDetailInfo.component');
 var listSkeleton_component_1 = require('../components/common/listSkeleton.component');
+var formInput_component_1 = require('../components/common/formInput.component');
 var http_1 = require('@angular/http');
 var AppModule = (function () {
     function AppModule() {
@@ -44,7 +45,8 @@ var AppModule = (function () {
                 app_component_1.AppComponent,
                 showList_component_1.ShowListComponent,
                 displayCommonDetailInfo_component_1.DisplayCommonDetailInfo,
-                listSkeleton_component_1.ListSkeletonComponent
+                listSkeleton_component_1.ListSkeletonComponent,
+                formInput_component_1.FormInputComponent
             ],
             bootstrap: [
                 app_component_1.AppComponent
