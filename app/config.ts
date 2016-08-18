@@ -7,20 +7,12 @@ let config = {
   route: {
 
     server: {
-      drink: {
-        list: 'dish'
-      }
-      , material: {
-        list: 'material'
-      }
+      drink: 'dish'
+      , material: 'material'
     }
     , client: {
-      drink: {
-        list: 'drinks'
-      }
-      , material: {
-        list: 'materials'
-      }
+      drink: 'drinks'
+      , material: 'materials'
       , commonAction: {
         add: 'add'
         , edit: 'edit'

@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { Drink } from '../../models/drink';
 import { Material } from '../../models/material';
 
+import { Router } from '@angular/router';
+
 import { Utils } from '../../common/utils';
 
 import { DrinkServices } from '../../services/drinkService';
@@ -19,19 +21,20 @@ export class DrinkAddEditComponent implements OnInit {
     constructor(
         private drinkServices: DrinkServices
         , private materialServices: MaterialServices
+        , private router: Router
     ) {
 
     }
     drink: Drink = new Drink();
-    
+
     parentDrinks: Drink[] = new Array();
     materials: Material[];
-    chosenMaterials: Material[] = new Array();
     errorMessage: string;
 
     ngOnInit() {
         this.getMaterials();
         this.getDrinks();
+        this.drink.materials = new Array<Material>();
     }
 
     getMaterials() {
@@ -56,25 +59,37 @@ export class DrinkAddEditComponent implements OnInit {
     }
 
     chooseMaterial(id: number) {
-        var matIndex = _.findIndex(this.materials, function (e) {
-            return e.id == id;
-        });
+        var matIndex = this.findIndex(this.materials, id);
 
         if (this.materials[matIndex]) {
-            this.chosenMaterials.push(this.materials[matIndex]);
+            this.drink.materials.push(this.materials[matIndex]);
             this.materials.splice(matIndex, 1);
         }
     }
 
-    removeMaterialFromChosen(id: number) {
-        var matIndex = _.findIndex(this.chosenMaterials, function (e) {
+    removeMaterialFromDrink(id: number) {
+        var matIndex = this.findIndex(this.drink.materials, id);
+
+        if (this.drink.materials[matIndex]) {
+            this.materials.push(this.drink.materials[matIndex]);
+            this.drink.materials.splice(matIndex, 1);
+        }
+    }
+
+    findIndex(items: any[], id: number) {
+        return _.findIndex(items, function (e) {
             return e.id == id;
         });
+    }
 
-        if (this.chosenMaterials[matIndex]) {
-            this.materials.push(this.chosenMaterials[matIndex]);
-            this.chosenMaterials.splice(matIndex, 1);
-        }
+    onSubmit() {
+        this.drinkServices.addDrink(this.drink)
+        .subscribe(
+            drink => {
+                this.router.navigate(['/drinks']);
+            }
+            , error => this.errorMessage = error
+        )
     }
 
     goBack() {

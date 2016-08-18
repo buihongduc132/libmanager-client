@@ -23,7 +23,7 @@ export class MaterialListComponent implements OnInit, OnDestroy {
 
     materials: Material[] = new Array();
     errorMessage: any;
-    type: string = Config.route.client.material.list;
+    type: string = Config.route.client.material;
     showProperties: string[] = [];
     title: string = "LIB Materials";
 

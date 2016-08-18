@@ -1,28 +1,6 @@
-
 <div class="row form-group">
-
-    <label class="{{labelWidth}}">{{controlName}}:</label>
+    <label class="{{labelWidth}}">{{labelName}}:</label>
     <div class="{{controlWidth}}">
-        <input
-        *ngIf="isShowInput('text') || isShowInput('password') || isShowInput('number')"
-        [type]="type" 
-        class="form-control" 
-        id="{{controlId}}" 
-        [required]="required"
-        [(ngModel)]="object[controlId]">
-
-        <select 
-        *ngIf="isShowInput('add')"
-        name="{{controlId}}" 
-        id="{{controlId}}"
-        class="form-control"
-        (change)="chooseItem($event.target.value)"
-        >
-            <option >Please choose item to add</option>
-            <option *ngFor="let item of items"
-            [value]="item.id">
-                {{item.name}}
-            </option>
-        </select>
+        <ng-content></ng-content>
     </div>
 </div>

@@ -19,7 +19,7 @@ import { Config } from '../config';
 
 const drinksRoutes: Routes = [
     {
-        path: Config.route.client.drink.list
+        path: Config.route.client.drink
         , component: DrinkRootComponent
         , children: [
             {

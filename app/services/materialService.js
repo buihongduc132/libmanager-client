@@ -22,13 +22,13 @@ var MaterialServices = (function () {
     }
     MaterialServices.prototype.getMaterials = function () {
         return this.http
-            .get(config_1.Config.host + "/" + config_1.Config.route.server.material.list)
+            .get(config_1.Config.host + "/" + config_1.Config.route.server.material)
             .map(DAO_1.DAO.extractData)
             .catch(logs_1.Logs.handleError);
     };
     MaterialServices.prototype.getMaterial = function (id) {
         return this.http
-            .get(config_1.Config.host + "/" + config_1.Config.route.server.material.list + "/" + id)
+            .get(config_1.Config.host + "/" + config_1.Config.route.server.material + "/" + id)
             .map(DAO_1.DAO.extractData)
             .catch(logs_1.Logs.handleError);
     };

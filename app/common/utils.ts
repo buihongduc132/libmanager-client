@@ -1,4 +1,3 @@
-
 export class Utils {
     static CurrentDate = function() {
         return new Date().toLocaleDateString();

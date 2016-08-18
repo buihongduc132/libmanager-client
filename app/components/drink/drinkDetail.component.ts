@@ -6,7 +6,7 @@ import { DisplayCommonDetailInfo } from '../common/displayCommonDetailInfo.compo
 
 import { Drink } from '../../models/drink';
 
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
     selector: 'drink-detail'
@@ -17,6 +17,7 @@ import { ActivatedRoute } from '@angular/router';
 export class DrinkDetailComponent implements OnInit, OnDestroy {
     constructor(
         private drinkServices: DrinkServices
+        , private router: Router
         , private route: ActivatedRoute) {
 
     }
@@ -42,6 +43,21 @@ export class DrinkDetailComponent implements OnInit, OnDestroy {
         .subscribe(
             drink => this.drink = drink,
             error => this.errorMessage = error
+        )
+    }
+
+    onEditEvent(id: number) {
+        alert("EDIT" + id);
+    }
+
+    onDeleteEvent(id: number) {
+        this.drinkServices.deleteDrink(id)
+        .subscribe(
+            drink => {
+                alert(`${drink.name} is deleted`);
+                this.router.navigate(['/']);
+            }
+            , error => this.errorMessage = error
         )
     }
 

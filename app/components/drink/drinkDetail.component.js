@@ -13,8 +13,9 @@ var drinkService_1 = require('../../services/drinkService');
 var drink_1 = require('../../models/drink');
 var router_1 = require('@angular/router');
 var DrinkDetailComponent = (function () {
-    function DrinkDetailComponent(drinkServices, route) {
+    function DrinkDetailComponent(drinkServices, router, route) {
         this.drinkServices = drinkServices;
+        this.router = router;
         this.route = route;
         this.drink = new drink_1.Drink;
     }
@@ -32,6 +33,17 @@ var DrinkDetailComponent = (function () {
         this.drinkServices.getDrink(id)
             .subscribe(function (drink) { return _this.drink = drink; }, function (error) { return _this.errorMessage = error; });
     };
+    DrinkDetailComponent.prototype.onEditEvent = function (id) {
+        alert("EDIT" + id);
+    };
+    DrinkDetailComponent.prototype.onDeleteEvent = function (id) {
+        var _this = this;
+        this.drinkServices.deleteDrink(id)
+            .subscribe(function (drink) {
+            alert(drink.name + " is deleted");
+            _this.router.navigate(['/']);
+        }, function (error) { return _this.errorMessage = error; });
+    };
     DrinkDetailComponent.prototype.ngOnDestroy = function () {
     };
     DrinkDetailComponent = __decorate([
@@ -39,7 +51,7 @@ var DrinkDetailComponent = (function () {
             selector: 'drink-detail',
             templateUrl: 'app/templates/drink/drinkDetail.template.html'
         }), 
-        __metadata('design:paramtypes', [drinkService_1.DrinkServices, router_1.ActivatedRoute])
+        __metadata('design:paramtypes', [drinkService_1.DrinkServices, router_1.Router, router_1.ActivatedRoute])
     ], DrinkDetailComponent);
     return DrinkDetailComponent;
 }());

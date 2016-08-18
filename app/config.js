@@ -6,20 +6,12 @@ var config = {
     host: 'http://localhost:1337',
     route: {
         server: {
-            drink: {
-                list: 'dish'
-            },
-            material: {
-                list: 'material'
-            }
+            drink: 'dish',
+            material: 'material'
         },
         client: {
-            drink: {
-                list: 'drinks'
-            },
-            material: {
-                list: 'materials'
-            },
+            drink: 'drinks',
+            material: 'materials',
             commonAction: {
                 add: 'add',
                 edit: 'edit'

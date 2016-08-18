@@ -27,14 +27,14 @@ export class MaterialServices {
 
     getMaterials(): Observable<Material[]> {
         return this.http
-        .get(`${Config.host}/${Config.route.server.material.list}`)
+        .get(`${Config.host}/${Config.route.server.material}`)
         .map(DAO.extractData)
         .catch(Logs.handleError);
     }
 
     getMaterial(id: number): Observable<Material> {
         return this.http
-        .get(`${Config.host}/${Config.route.server.material.list}/${id}`)
+        .get(`${Config.host}/${Config.route.server.material}/${id}`)
         .map(DAO.extractData)
         .catch(Logs.handleError);
     }

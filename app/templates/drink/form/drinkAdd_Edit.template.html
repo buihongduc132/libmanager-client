@@ -9,65 +9,37 @@
     </div>
 
     <div class="row">
-        {{drink.name}}
-        <form>
-            <form-input 
-            controlName="Name"
-            controlId="Name"
-            type="text"
-            required="true">
+        <form (ngSubmit)="onSubmit()" #drinkForm="ngForm">
+            <form-input labelName="Name">
+                <input type="text" class="form-control" id="name" required name="name" [(ngModel)]="drink.name">
             </form-input>
 
-            <div class="row form-group">
-
-                <label class="col-xs-3" for="name">Name:</label>
-                <div class="col-xs-9">
-                    <input type="text" 
-                    class="form-control" id="name"
-                    required>
-                </div>
-            </div>
-
-            <div class="row form-group">
-                <label for="price" class="col-xs-3">Price:</label>
-                <div class="col-xs-9">
-                    <input type="text" class="form-control" id="price">
-                </div>
-            </div>
-
-
-            <form-input 
-            controlName="Choose Materials"
-            controlId="materials"
-            type="add"
-            required="true"
-            [items]="materials"
-            (onItemAdded)="onItemAdded($event)">
-            
+            <form-input labelName="Price">
+                <input type="number" class="form-control" id="price" required [(ngModel)]="drink.price" name="price">
             </form-input>
 
-            <div class="row form-group">
-                <label class="col-xs-3" for="materials">Choose Parent Drink:</label>
-                <div class="col-xs-9">
-                    <select (change)="chooseMaterial($event.target.value)" id="materials" class="form-control">
+            <form-input labelName="Materials">
+                <select (change)="chooseMaterial($event.target.value)" id="materials" class="form-control">
                         <option>Please choose a Material</option>
                         <option *ngFor="let material of materials"
                         [value]="material.id">
                             {{ material.name }}
                         </option>
                     </select>
+            </form-input>
+
+            <div class="row">
+                <div class="col-xs-3" *ngFor="let material of drink.materials">
+                    <span class="btn btn-info" (click)="removeMaterialFromDrink(material.id)">
+                {{ material.name }}
+                </span>
                 </div>
+            </div>
+
+            <div class="row">
+                <button class="btn btn-success" type="submit" [disabled]="!drinkForm.form.valid">Submit</button>
             </div>
         </form>
 
-        <div class="row">
-            <div class="col-xs-3" *ngFor="let chosenMaterial of chosenMaterials">
-                <span class="btn btn-info" (click)="removeMaterialFromChosen(chosenMaterial.id)">
-                {{ chosenMaterial.name }}
-                </span>
-            </div>
-        </div>
-
-        <button class="btn btn-success">Submit</button>
     </div>
 </div>

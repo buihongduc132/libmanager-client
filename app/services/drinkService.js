@@ -21,12 +21,25 @@ var DrinkServices = (function () {
         this.http = http;
     }
     DrinkServices.prototype.getDrinks = function () {
-        return this.http.get(config_1.Config.host + "/" + config_1.Config.route.server.drink.list)
+        return this.http.get(config_1.Config.host + "/" + config_1.Config.route.server.drink)
             .map(DAO_1.DAO.extractData)
             .catch(logs_1.Logs.handleError);
     };
     DrinkServices.prototype.getDrink = function (id) {
-        return this.http.get(config_1.Config.host + "/" + config_1.Config.route.server.drink.list + "/" + id)
+        return this.http.get(config_1.Config.host + "/" + config_1.Config.route.server.drink + "/" + id)
+            .map(DAO_1.DAO.extractData)
+            .catch(logs_1.Logs.handleError);
+    };
+    DrinkServices.prototype.addDrink = function (drink) {
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        var options = new http_1.RequestOptions({ headers: headers });
+        return this.http.post(config_1.Config.host + "/" + config_1.Config.route.server.drink, drink, options)
+            .map(DAO_1.DAO.extractData)
+            .catch(logs_1.Logs.handleError);
+    };
+    DrinkServices.prototype.deleteDrink = function (id) {
+        return this.http
+            .delete(config_1.Config.host + "/" + config_1.Config.route.server.drink + "/" + id)
             .map(DAO_1.DAO.extractData)
             .catch(logs_1.Logs.handleError);
     };

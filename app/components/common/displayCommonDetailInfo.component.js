@@ -10,8 +10,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var utils_1 = require('../../common/utils');
+// import { Router } from '@angular/router';
 var DisplayCommonDetailInfo = (function () {
     function DisplayCommonDetailInfo() {
+        this.onEditEvent = new core_1.EventEmitter();
+        this.onDeleteEvent = new core_1.EventEmitter();
     }
     DisplayCommonDetailInfo.prototype.goBack = function () {
         utils_1.Utils.goBack();
@@ -19,10 +22,24 @@ var DisplayCommonDetailInfo = (function () {
     DisplayCommonDetailInfo.prototype.showPrice = function () {
         return this.item.price !== undefined;
     };
+    DisplayCommonDetailInfo.prototype.onEdit = function (id) {
+        this.onEditEvent.emit(id);
+    };
+    DisplayCommonDetailInfo.prototype.onDelete = function (id) {
+        this.onDeleteEvent.emit(id);
+    };
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)
     ], DisplayCommonDetailInfo.prototype, "item", void 0);
+    __decorate([
+        core_1.Output(), 
+        __metadata('design:type', Object)
+    ], DisplayCommonDetailInfo.prototype, "onEditEvent", void 0);
+    __decorate([
+        core_1.Output(), 
+        __metadata('design:type', Object)
+    ], DisplayCommonDetailInfo.prototype, "onDeleteEvent", void 0);
     DisplayCommonDetailInfo = __decorate([
         core_1.Component({
             selector: 'display-common-detail-info',

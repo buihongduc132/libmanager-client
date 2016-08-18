@@ -6,7 +6,7 @@ var materialRoot_component_1 = require('../components/material/materialRoot.comp
 var config_1 = require('../config');
 var materialsRoutes = [
     {
-        path: config_1.Config.route.client.material.list,
+        path: config_1.Config.route.client.material,
         component: materialRoot_component_1.MaterialRootComponent,
         children: [
             {

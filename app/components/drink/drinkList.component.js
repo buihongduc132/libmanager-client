@@ -17,7 +17,7 @@ var DrinkListComponent = (function () {
         this.drinkServices = drinkServices;
         this.drinks = new Array();
         this.showProperties = [];
-        this.type = config_1.Config.route.client.drink.list;
+        this.type = config_1.Config.route.client.drink;
         this.title = "LIB Drinks";
     }
     DrinkListComponent.prototype.ngOnDestroy = function () {

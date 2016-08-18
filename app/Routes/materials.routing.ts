@@ -16,7 +16,7 @@ import { Config } from '../config';
 
 const materialsRoutes: Routes = [
     {
-        path: Config.route.client.material.list
+        path: Config.route.client.material
         , component: MaterialRootComponent
         , children: [
             {

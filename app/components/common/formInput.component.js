@@ -12,38 +12,13 @@ var core_1 = require('@angular/core');
 var utils_1 = require('../../common/utils');
 var FormInputComponent = (function () {
     function FormInputComponent() {
-        this.type = 'text';
-        this.required = false;
         this.labelWidth = utils_1.Utils.getResponsiveClass(3);
         this.controlWidth = utils_1.Utils.getResponsiveClass(9);
-        this.items = new Array();
-        this.onItemAdded = new core_1.EventEmitter();
     }
-    FormInputComponent.prototype.isShowInput = function (type) {
-        return type === this.type;
-    };
-    FormInputComponent.prototype.chooseItem = function (id) {
-        this.emmitAddEvent(id);
-    };
-    FormInputComponent.prototype.emmitAddEvent = function (id) {
-        this.onItemAdded.emit(id);
-    };
     __decorate([
         core_1.Input(), 
         __metadata('design:type', String)
-    ], FormInputComponent.prototype, "controlName", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', String)
-    ], FormInputComponent.prototype, "controlId", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', String)
-    ], FormInputComponent.prototype, "type", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Boolean)
-    ], FormInputComponent.prototype, "required", void 0);
+    ], FormInputComponent.prototype, "labelName", void 0);
     __decorate([
         core_1.Input(), 
         __metadata('design:type', String)
@@ -52,14 +27,6 @@ var FormInputComponent = (function () {
         core_1.Input(), 
         __metadata('design:type', String)
     ], FormInputComponent.prototype, "controlWidth", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Array)
-    ], FormInputComponent.prototype, "items", void 0);
-    __decorate([
-        core_1.Output(), 
-        __metadata('design:type', Object)
-    ], FormInputComponent.prototype, "onItemAdded", void 0);
     FormInputComponent = __decorate([
         core_1.Component({
             selector: 'form-input',

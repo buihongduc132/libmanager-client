@@ -15,7 +15,7 @@ var MaterialListComponent = (function () {
     function MaterialListComponent(materialServices) {
         this.materialServices = materialServices;
         this.materials = new Array();
-        this.type = config_1.Config.route.client.material.list;
+        this.type = config_1.Config.route.client.material;
         this.showProperties = [];
         this.title = "LIB Materials";
     }

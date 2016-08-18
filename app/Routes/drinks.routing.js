@@ -7,7 +7,7 @@ var drinkAdd_Edit_component_1 = require('../components/drink/drinkAdd_Edit.compo
 var config_1 = require('../config');
 var drinksRoutes = [
     {
-        path: config_1.Config.route.client.drink.list,
+        path: config_1.Config.route.client.drink,
         component: drinkRoot_component_1.DrinkRootComponent,
         children: [
             {

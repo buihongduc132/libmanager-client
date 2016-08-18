@@ -25,7 +25,7 @@ export class DrinkListComponent implements OnInit {
     drinks: Drink[] = new Array();
     showProperties: string[] = [];
     errorMessage: any;
-    type: string = Config.route.client.drink.list;
+    type: string = Config.route.client.drink;
     title: string = "LIB Drinks";
     sub: any;
 
