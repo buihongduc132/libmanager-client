@@ -16,17 +16,32 @@ var drinkService_1 = require('../../services/drinkService');
 var materialService_1 = require('../../services/materialService');
 var _ = require('lodash');
 var DrinkAddEditComponent = (function () {
-    function DrinkAddEditComponent(drinkServices, materialServices, router) {
+    function DrinkAddEditComponent(drinkServices, materialServices, router, route) {
         this.drinkServices = drinkServices;
         this.materialServices = materialServices;
         this.router = router;
+        this.route = route;
         this.drink = new drink_1.Drink();
         this.parentDrinks = new Array();
     }
     DrinkAddEditComponent.prototype.ngOnInit = function () {
+        var _this = this;
         this.getMaterials();
         this.getDrinks();
         this.drink.materials = new Array();
+        this.sub = this.route
+            .params.subscribe(function (params) {
+            var id = +params['id'];
+            if (id) {
+                _this.id = id;
+                _this.getDrinkDetail(id);
+            }
+        });
+    };
+    DrinkAddEditComponent.prototype.getDrinkDetail = function (id) {
+        var _this = this;
+        this.drinkServices.getDrink(id)
+            .subscribe(function (drink) { return _this.drink = drink; }, function (error) { return _this.errorMessage = error; });
     };
     DrinkAddEditComponent.prototype.getMaterials = function () {
         var _this = this;
@@ -61,6 +76,21 @@ var DrinkAddEditComponent = (function () {
         });
     };
     DrinkAddEditComponent.prototype.onSubmit = function () {
+        if (this.id) {
+            this.editDrink(this.drink);
+        }
+        else {
+            this.addDrink(this.drink);
+        }
+    };
+    DrinkAddEditComponent.prototype.editDrink = function (drink) {
+        var _this = this;
+        this.drinkServices.editDrink(this.drink)
+            .subscribe(function (drink) {
+            _this.router.navigate(['/drinks', drink.id]);
+        }, function (error) { return _this.errorMessage = error; });
+    };
+    DrinkAddEditComponent.prototype.addDrink = function (drink) {
         var _this = this;
         this.drinkServices.addDrink(this.drink)
             .subscribe(function (drink) {
@@ -68,14 +98,14 @@ var DrinkAddEditComponent = (function () {
         }, function (error) { return _this.errorMessage = error; });
     };
     DrinkAddEditComponent.prototype.goBack = function () {
-        utils_1.Utils.goBack();
+        utils_1.Utils.goBack(this.router);
     };
     DrinkAddEditComponent = __decorate([
         core_1.Component({
             selector: 'drink-add-edit',
             templateUrl: 'app/templates/drink/form/drinkAdd_Edit.template.html'
         }), 
-        __metadata('design:paramtypes', [drinkService_1.DrinkServices, materialService_1.MaterialServices, router_1.Router])
+        __metadata('design:paramtypes', [drinkService_1.DrinkServices, materialService_1.MaterialServices, router_1.Router, router_1.ActivatedRoute])
     ], DrinkAddEditComponent);
     return DrinkAddEditComponent;
 }());

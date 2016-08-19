@@ -2,7 +2,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 import { Utils } from '../../common/utils';
 
-// import { Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'display-common-detail-info'
@@ -11,17 +11,18 @@ import { Utils } from '../../common/utils';
 
 export class DisplayCommonDetailInfo {
     @Input() item: any;
+    @Input() type: string;
     @Output() onEditEvent = new EventEmitter<number>();
     @Output() onDeleteEvent = new EventEmitter<number>();
 
     constructor(
-        // private router: R
+        private router: Router
     ) {
 
     }
 
-    goBack() {
-        Utils.goBack();
+    toList() {
+        this.router.navigate(['/'+this.type]);
     }
 
     showPrice() {

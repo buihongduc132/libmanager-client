@@ -34,7 +34,7 @@ var DrinkDetailComponent = (function () {
             .subscribe(function (drink) { return _this.drink = drink; }, function (error) { return _this.errorMessage = error; });
     };
     DrinkDetailComponent.prototype.onEditEvent = function (id) {
-        alert("EDIT" + id);
+        this.router.navigate(["/drinks", "edit", id]);
     };
     DrinkDetailComponent.prototype.onDeleteEvent = function (id) {
         var _this = this;

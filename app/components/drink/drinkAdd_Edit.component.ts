@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Drink } from '../../models/drink';
 import { Material } from '../../models/material';
 
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { Utils } from '../../common/utils';
 
@@ -22,11 +22,14 @@ export class DrinkAddEditComponent implements OnInit {
         private drinkServices: DrinkServices
         , private materialServices: MaterialServices
         , private router: Router
+        , private route: ActivatedRoute
     ) {
 
     }
     drink: Drink = new Drink();
+    sub: any;
 
+    id: number;
     parentDrinks: Drink[] = new Array();
     materials: Material[];
     errorMessage: string;
@@ -35,6 +38,26 @@ export class DrinkAddEditComponent implements OnInit {
         this.getMaterials();
         this.getDrinks();
         this.drink.materials = new Array<Material>();
+
+        this.sub = this.route
+            .params.subscribe(
+            params => {
+                let id = +params['id'];
+                if (id) {
+
+                    this.id = id;
+                    this.getDrinkDetail(id);
+                }
+            }
+            )
+    }
+
+    getDrinkDetail(id: number) {
+        this.drinkServices.getDrink(id)
+            .subscribe(
+            drink => this.drink = drink
+            , error => this.errorMessage = error
+            )
     }
 
     getMaterials() {
@@ -83,16 +106,36 @@ export class DrinkAddEditComponent implements OnInit {
     }
 
     onSubmit() {
-        this.drinkServices.addDrink(this.drink)
+        if(this.id) {
+            this.editDrink(this.drink);
+        }
+        else {
+            this.addDrink(this.drink);
+        }
+    }
+
+    editDrink(drink: Drink) {
+        this.drinkServices.editDrink(this.drink)
         .subscribe(
             drink => {
-                this.router.navigate(['/drinks']);
+                this.router.navigate(['/drinks', drink.id]);
             }
             , error => this.errorMessage = error
         )
     }
 
+    addDrink(drink: Drink) {
+
+        this.drinkServices.addDrink(this.drink)
+            .subscribe(
+            drink => {
+                this.router.navigate(['/drinks']);
+            }
+            , error => this.errorMessage = error
+            )
+    }
+
     goBack() {
-        Utils.goBack();
+        Utils.goBack(this.router);
     }
 }

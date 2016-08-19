@@ -9,15 +9,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var utils_1 = require('../../common/utils');
-// import { Router } from '@angular/router';
+var router_1 = require('@angular/router');
 var DisplayCommonDetailInfo = (function () {
-    function DisplayCommonDetailInfo() {
+    function DisplayCommonDetailInfo(router) {
+        this.router = router;
         this.onEditEvent = new core_1.EventEmitter();
         this.onDeleteEvent = new core_1.EventEmitter();
     }
-    DisplayCommonDetailInfo.prototype.goBack = function () {
-        utils_1.Utils.goBack();
+    DisplayCommonDetailInfo.prototype.toList = function () {
+        this.router.navigate(['/' + this.type]);
     };
     DisplayCommonDetailInfo.prototype.showPrice = function () {
         return this.item.price !== undefined;
@@ -33,6 +33,10 @@ var DisplayCommonDetailInfo = (function () {
         __metadata('design:type', Object)
     ], DisplayCommonDetailInfo.prototype, "item", void 0);
     __decorate([
+        core_1.Input(), 
+        __metadata('design:type', String)
+    ], DisplayCommonDetailInfo.prototype, "type", void 0);
+    __decorate([
         core_1.Output(), 
         __metadata('design:type', Object)
     ], DisplayCommonDetailInfo.prototype, "onEditEvent", void 0);
@@ -45,7 +49,7 @@ var DisplayCommonDetailInfo = (function () {
             selector: 'display-common-detail-info',
             templateUrl: 'app/templates/common/displayCommonDetailInfo.template.html'
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [router_1.Router])
     ], DisplayCommonDetailInfo);
     return DisplayCommonDetailInfo;
 }());

@@ -24,7 +24,7 @@ export class DrinkDetailComponent implements OnInit, OnDestroy {
 
     drink: Drink = new Drink;
     errorMessage: any;
-    id: any;
+    id: number;
     sub: any;
 
     ngOnInit() {
@@ -47,7 +47,7 @@ export class DrinkDetailComponent implements OnInit, OnDestroy {
     }
 
     onEditEvent(id: number) {
-        alert("EDIT" + id);
+        this.router.navigate(["/drinks", "edit", id]);
     }
 
     onDeleteEvent(id: number) {

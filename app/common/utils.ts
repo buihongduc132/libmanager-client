@@ -1,3 +1,4 @@
+
 export class Utils {
     static CurrentDate = function() {
         return new Date().toLocaleDateString();
@@ -18,6 +19,8 @@ export class Utils {
     public static goBack = function() {
         window.history.back();
     }
+
+
 
     public static getResponsiveClass = function(width, size = 'xs') {
         return `col-${size}-${width}`;
