@@ -1,0 +1,45 @@
+<form-container formName="Material">
+    <form (ngSubmit)="onSubmit()" #materialForm="ngForm">
+        <form-input labelName="Name">
+            <input type="text"
+            class="form-control"
+            id="name"
+            required
+            name="name"
+            [(ngModel)]="material.name">
+        </form-input>
+
+        <form-input labelName="Price">
+            <input type="number" class="form-control"
+            id="price" name="price"
+            required [(ngModel)]="material.price">
+        </form-input>
+
+        <form-input labelName="Container Amount">
+            <input type="number"
+            class="form-control"
+            id="containerAmount"
+            name="containerAmount"
+            required
+            [(ngModel)]="material.containerAmount">
+        </form-input>
+
+        <form-input labelName="Unit">
+            <select name="unit" id="unit"
+            required
+            class="form-control" [(ngModel)]="material.unit">
+                <option [value]="unit" 
+                *ngFor="let unit of unitType">
+                {{unit}}</option>
+            </select>
+        </form-input>
+        
+        <form-input labelName="Unit Price">
+            <label>{{material.price/material.containerAmount}}/{{material.unit}}</label>
+        </form-input>
+        
+        <div class="row">
+            <button class="btn btn-success" type="submit" [disabled]="!materialForm.form.valid">Submit</button>
+        </div>
+    </form>
+</form-container>

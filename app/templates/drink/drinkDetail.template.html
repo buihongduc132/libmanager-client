@@ -5,7 +5,10 @@ type="drinks"
 (onDeleteEvent)="onDeleteEvent($event)"
 >
     <!--Drink Details Go Here-->
-    <button class="btn btn-info" [disabled] *ngFor="let mat of drink.materials">
+    <button class="btn btn-info" 
+    [disabled] *ngFor="let mat of drink.materials"
+    [routerLink]="['/materials', mat.id]">
         {{mat.name}}
     </button>
 </display-common-detail-info>
+

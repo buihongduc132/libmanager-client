@@ -22,6 +22,15 @@ var Utils = (function () {
         if (size === void 0) { size = 'xs'; }
         return "col-" + size + "-" + width;
     };
+    Utils.bindEnum = function (enumArr) {
+        var arr = new Array();
+        for (var item in enumArr) {
+            if (!(+item > 0)) {
+                arr.push(item);
+            }
+        }
+        return arr;
+    };
     return Utils;
 }());
 exports.Utils = Utils;

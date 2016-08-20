@@ -23,82 +23,95 @@ var DrinkAddEditComponent = (function () {
         this.route = route;
         this.drink = new drink_1.Drink();
         this.parentDrinks = new Array();
+        this.getDrinkDetail = this._getDrinkDetail;
+        this.getMaterials = this._getMaterials;
+        this.getDrinks = this._getDrinks;
+        this.onItemAdded = this._onItemAdded;
+        this.chooseMaterial = this._chooseMaterial;
+        this.removeMaterialFromDrink = this._removeMaterialFromDrink;
+        this.findIndex = this._findIndex;
+        this.editDrink = this._editDrink;
+        this.addDrink = this._addDrink;
+        this.goBack = this._goBack;
+        this.getParams = this._getParams;
     }
     DrinkAddEditComponent.prototype.ngOnInit = function () {
-        var _this = this;
         this.getMaterials();
         this.getDrinks();
         this.drink.materials = new Array();
+        this.getParams();
+        if (this.id) {
+            this.getDrinkDetail(this.id);
+        }
+    };
+    DrinkAddEditComponent.prototype.onSubmit = function () {
+        if (this.id) {
+            this._editDrink(this.drink);
+        }
+        else {
+            this._addDrink(this.drink);
+        }
+    };
+    DrinkAddEditComponent.prototype._getParams = function () {
+        var _this = this;
         this.sub = this.route
             .params.subscribe(function (params) {
-            var id = +params['id'];
-            if (id) {
-                _this.id = id;
-                _this.getDrinkDetail(id);
-            }
+            _this.id = params['id'];
         });
     };
-    DrinkAddEditComponent.prototype.getDrinkDetail = function (id) {
+    DrinkAddEditComponent.prototype._getDrinkDetail = function (id) {
         var _this = this;
         this.drinkServices.getDrink(id)
             .subscribe(function (drink) { return _this.drink = drink; }, function (error) { return _this.errorMessage = error; });
     };
-    DrinkAddEditComponent.prototype.getMaterials = function () {
+    DrinkAddEditComponent.prototype._getMaterials = function () {
         var _this = this;
         this.materialServices.getMaterials()
             .subscribe(function (materials) { return _this.materials = materials; }, function (error) { return _this.errorMessage = error; });
     };
-    DrinkAddEditComponent.prototype.getDrinks = function () {
+    DrinkAddEditComponent.prototype._getDrinks = function () {
         var _this = this;
         this.drinkServices.getDrinks()
             .subscribe(function (drinks) { return _this.parentDrinks = drinks; }, function (error) { return _this.errorMessage = error; });
     };
-    DrinkAddEditComponent.prototype.onItemAdded = function (id) {
-        this.chooseMaterial(id);
+    DrinkAddEditComponent.prototype._onItemAdded = function (id) {
+        this._chooseMaterial(id);
     };
-    DrinkAddEditComponent.prototype.chooseMaterial = function (id) {
-        var matIndex = this.findIndex(this.materials, id);
+    DrinkAddEditComponent.prototype._chooseMaterial = function (id) {
+        var matIndex = this._findIndex(this.materials, id);
         if (this.materials[matIndex]) {
             this.drink.materials.push(this.materials[matIndex]);
             this.materials.splice(matIndex, 1);
         }
     };
-    DrinkAddEditComponent.prototype.removeMaterialFromDrink = function (id) {
+    DrinkAddEditComponent.prototype._removeMaterialFromDrink = function (id) {
         var matIndex = this.findIndex(this.drink.materials, id);
         if (this.drink.materials[matIndex]) {
             this.materials.push(this.drink.materials[matIndex]);
             this.drink.materials.splice(matIndex, 1);
         }
     };
-    DrinkAddEditComponent.prototype.findIndex = function (items, id) {
+    DrinkAddEditComponent.prototype._findIndex = function (items, id) {
         return _.findIndex(items, function (e) {
             return e.id == id;
         });
     };
-    DrinkAddEditComponent.prototype.onSubmit = function () {
-        if (this.id) {
-            this.editDrink(this.drink);
-        }
-        else {
-            this.addDrink(this.drink);
-        }
-    };
-    DrinkAddEditComponent.prototype.editDrink = function (drink) {
+    DrinkAddEditComponent.prototype._editDrink = function (drink) {
         var _this = this;
         this.drinkServices.editDrink(this.drink)
             .subscribe(function (drink) {
             _this.router.navigate(['/drinks', drink.id]);
         }, function (error) { return _this.errorMessage = error; });
     };
-    DrinkAddEditComponent.prototype.addDrink = function (drink) {
+    DrinkAddEditComponent.prototype._addDrink = function (drink) {
         var _this = this;
         this.drinkServices.addDrink(this.drink)
             .subscribe(function (drink) {
             _this.router.navigate(['/drinks']);
         }, function (error) { return _this.errorMessage = error; });
     };
-    DrinkAddEditComponent.prototype.goBack = function () {
-        utils_1.Utils.goBack(this.router);
+    DrinkAddEditComponent.prototype._goBack = function () {
+        utils_1.Utils.goBack();
     };
     DrinkAddEditComponent = __decorate([
         core_1.Component({

@@ -15,6 +15,17 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 
 export class DrinkDetailComponent implements OnInit, OnDestroy {
+    drink: Drink = new Drink;
+    errorMessage: any;
+    id: number;
+    sub: any;
+    params: any; 
+
+    getDrinkDetail = this._getDrinkDetail;
+    onEditEvent = this._onEditEvent;
+    onDeleteEvent = this._onDeleteEvent;
+    getParams = this._getParams;
+
     constructor(
         private drinkServices: DrinkServices
         , private router: Router
@@ -22,23 +33,24 @@ export class DrinkDetailComponent implements OnInit, OnDestroy {
 
     }
 
-    drink: Drink = new Drink;
-    errorMessage: any;
-    id: number;
-    sub: any;
-
     ngOnInit() {
+        this.getParams();
+        this.id = this.params['id'];
+        this.getDrinkDetail(this.id);
+    }
+
+    ngOnDestroy() {
+
+    }
+
+    _getParams() {
         this.sub = this.route
         .params.subscribe(
-            params => {
-                let id = +params['id'];
-                this.id = id;
-                this.getDrinkDetail(this.id);
-            }
+            params => this.params = params
         );
     }
 
-    getDrinkDetail(id: number) {
+    _getDrinkDetail(id: number) {
         this.drinkServices.getDrink(id)
         .subscribe(
             drink => this.drink = drink,
@@ -46,11 +58,11 @@ export class DrinkDetailComponent implements OnInit, OnDestroy {
         )
     }
 
-    onEditEvent(id: number) {
+    _onEditEvent(id: number) {
         this.router.navigate(["/drinks", "edit", id]);
     }
 
-    onDeleteEvent(id: number) {
+    _onDeleteEvent(id: number) {
         this.drinkServices.deleteDrink(id)
         .subscribe(
             drink => {
@@ -61,9 +73,6 @@ export class DrinkDetailComponent implements OnInit, OnDestroy {
         )
     }
 
-    ngOnDestroy() {
-
-    }
 }
 
 

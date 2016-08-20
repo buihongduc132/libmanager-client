@@ -20,9 +20,19 @@ export class Utils {
         window.history.back();
     }
 
-
-
     public static getResponsiveClass = function(width, size = 'xs') {
         return `col-${size}-${width}`;
+    }
+
+    public static bindEnum = function(enumArr) {
+        var arr = new Array();
+
+        for(let item in enumArr) {
+            if(!(+item > 0 )) {
+                arr.push(item);
+            }
+        }
+
+        return arr;
     }
 }

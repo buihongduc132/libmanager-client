@@ -34,6 +34,9 @@ from '../components/common/listSkeleton.component';
 import { FormInputComponent }
 from '../components/common/formInput.component';
 
+import { FormContainerComponent }
+from '../components/common/formContainer.component';
+
 import { HttpModule
     , JsonpModule
 } from '@angular/http';
@@ -61,6 +64,7 @@ import { HttpModule
         , DisplayCommonDetailInfo
         , ListSkeletonComponent
         , FormInputComponent
+        , FormContainerComponent
     ]
     , bootstrap: [
         AppComponent

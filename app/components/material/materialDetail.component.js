@@ -14,35 +14,52 @@ var material_1 = require('../../models/material');
 var materialService_1 = require('../../services/materialService');
 require('rxjs/add/operator/map');
 var MaterialDetailComponent = (function () {
-    function MaterialDetailComponent(materialServices, route) {
+    function MaterialDetailComponent(materialServices, route, router) {
         this.materialServices = materialServices;
         this.route = route;
+        this.router = router;
         this.material = new material_1.Material;
+        // private sub: Subc
+        this.getMaterialDetail = this._getMaterialDetail;
+        this.getParams = this._getParams;
+        this.onEditEvent = this._onEditEvent;
+        this.onDeleteEvent = this._onDeleteEvent;
     }
-    // private sub: Subc
     MaterialDetailComponent.prototype.ngOnInit = function () {
+        this.getParams();
+        this.id = this.params['id'];
+        this.getMaterialDetail(this.id);
+    };
+    MaterialDetailComponent.prototype.ngOnDestroy = function () {
+    };
+    MaterialDetailComponent.prototype._getParams = function () {
         var _this = this;
         this.sub = this.route
-            .params.subscribe(function (params) {
-            var id = +params['id'];
-            _this.id = id;
-            _this.getMaterialDetail(_this.id);
-        });
+            .params.subscribe(function (params) { return _this.params = params; });
     };
-    MaterialDetailComponent.prototype.getMaterialDetail = function (id) {
+    MaterialDetailComponent.prototype._getMaterialDetail = function (id) {
         var _this = this;
         this.materialServices
             .getMaterial(id)
             .subscribe(function (material) { return _this.material = material; }, function (error) { return _this.errorMessage = error; });
     };
-    MaterialDetailComponent.prototype.ngOnDestroy = function () {
+    MaterialDetailComponent.prototype._onEditEvent = function (id) {
+        this.router.navigate(["/materials", "edit", id]);
+    };
+    MaterialDetailComponent.prototype._onDeleteEvent = function (id) {
+        var _this = this;
+        this.materialServices.deleteDrink(id)
+            .subscribe(function (material) {
+            alert(material.name + " is deleted");
+            _this.router.navigate(['/']);
+        }, function (error) { return _this.errorMessage = error; });
     };
     MaterialDetailComponent = __decorate([
         core_1.Component({
             selector: 'material-detail',
             templateUrl: 'app/templates/material/materialDetail.template.html'
         }), 
-        __metadata('design:paramtypes', [materialService_1.MaterialServices, router_1.ActivatedRoute])
+        __metadata('design:paramtypes', [materialService_1.MaterialServices, router_1.ActivatedRoute, router_1.Router])
     ], MaterialDetailComponent);
     return MaterialDetailComponent;
 }());

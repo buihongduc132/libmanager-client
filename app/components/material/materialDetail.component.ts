@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { Material } from '../../models/material';
 
@@ -17,32 +17,45 @@ import 'rxjs/add/operator/map';
 
 })
 
-export class MaterialDetailComponent implements OnInit, OnDestroy {
+export class MaterialDetailComponent implements OnInit, OnDestroy {   
+    material: Material = new Material;
+    errorMessage: any;
+    sub: any;
+    id: number;
+    params: any;
+    // private sub: Subc
+    
+    getMaterialDetail = this._getMaterialDetail;
+    getParams = this._getParams;
+    onEditEvent = this._onEditEvent;
+    onDeleteEvent = this._onDeleteEvent;
+
     constructor (
         private materialServices: MaterialServices
         , private route: ActivatedRoute
+        , private router: Router
     ) {
 
     }
 
-    private material: Material = new Material;
-    private errorMessage: any;
-    private sub: any;
-    private id: number;
-    // private sub: Subc
-
     ngOnInit() {
+        this.getParams();
+        this.id = this.params['id'];
+        this.getMaterialDetail(this.id);
+    }
+
+    ngOnDestroy() {
+
+    }
+
+    _getParams() {
         this.sub = this.route
         .params.subscribe(
-            params => {
-                let id = +params['id'];
-                this.id = id;
-                this.getMaterialDetail(this.id);
-            }
+            params => this.params = params
         );
     }
 
-    getMaterialDetail(id: number) {
+    _getMaterialDetail(id: number) {
         this.materialServices
         .getMaterial(id)
         .subscribe(
@@ -51,7 +64,18 @@ export class MaterialDetailComponent implements OnInit, OnDestroy {
         );
     }
 
-    ngOnDestroy() {
+    _onEditEvent(id: number) {
+        this.router.navigate(["/materials", "edit", id]);
+    }
 
+    _onDeleteEvent(id: number) {
+        this.materialServices.deleteDrink(id)
+        .subscribe(
+            material => {
+                alert(`${material.name} is deleted`);
+                this.router.navigate(['/']);
+            }
+            , error => this.errorMessage = error
+        )
     }
 }

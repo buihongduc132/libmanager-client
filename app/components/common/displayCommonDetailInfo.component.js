@@ -9,24 +9,43 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var utils_1 = require('../../common/utils');
 var router_1 = require('@angular/router');
 var DisplayCommonDetailInfo = (function () {
     function DisplayCommonDetailInfo(router) {
         this.router = router;
+        this.backToList = false;
         this.onEditEvent = new core_1.EventEmitter();
         this.onDeleteEvent = new core_1.EventEmitter();
+        this.toList = this._toList;
+        this.isShowPrice = this._isShowPrice;
+        this.onEdit = this._onEdit;
+        this.onDelete = this._onDelete;
+        this.onBack = this._onBack;
+        this.goBack = this._goBack;
     }
-    DisplayCommonDetailInfo.prototype.toList = function () {
+    DisplayCommonDetailInfo.prototype._toList = function () {
         this.router.navigate(['/' + this.type]);
     };
-    DisplayCommonDetailInfo.prototype.showPrice = function () {
+    DisplayCommonDetailInfo.prototype._isShowPrice = function () {
         return this.item.price !== undefined;
     };
-    DisplayCommonDetailInfo.prototype.onEdit = function (id) {
+    DisplayCommonDetailInfo.prototype._onEdit = function (id) {
         this.onEditEvent.emit(id);
     };
-    DisplayCommonDetailInfo.prototype.onDelete = function (id) {
+    DisplayCommonDetailInfo.prototype._onDelete = function (id) {
         this.onDeleteEvent.emit(id);
+    };
+    DisplayCommonDetailInfo.prototype._onBack = function () {
+        if (this.backToList) {
+            this.toList();
+        }
+        else {
+            this.goBack();
+        }
+    };
+    DisplayCommonDetailInfo.prototype._goBack = function () {
+        utils_1.Utils.goBack();
     };
     __decorate([
         core_1.Input(), 
@@ -36,6 +55,10 @@ var DisplayCommonDetailInfo = (function () {
         core_1.Input(), 
         __metadata('design:type', String)
     ], DisplayCommonDetailInfo.prototype, "type", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Boolean)
+    ], DisplayCommonDetailInfo.prototype, "backToList", void 0);
     __decorate([
         core_1.Output(), 
         __metadata('design:type', Object)

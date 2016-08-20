@@ -5,3 +5,9 @@ export enum UserType {
 }
 
 // export enum 
+export enum Unit {
+    g = 1
+    , kg
+    , l
+    , ml
+}

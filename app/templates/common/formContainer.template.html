@@ -1,0 +1,15 @@
+<div class="container">
+
+    <div class="row">
+        <button (click)="goBack()" class="button-in-title btn btn-info col-xs-2">
+    <span class="glyphicon glyphicon-chevron-left"></span>
+    Back
+    </button>
+        <h2 class="col-xs-10">{{ formName }}</h2>
+    </div>
+
+    <div class="row">
+        <ng-content></ng-content>
+
+    </div>
+</div>

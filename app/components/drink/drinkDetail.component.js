@@ -18,33 +18,38 @@ var DrinkDetailComponent = (function () {
         this.router = router;
         this.route = route;
         this.drink = new drink_1.Drink;
+        this.getDrinkDetail = this._getDrinkDetail;
+        this.onEditEvent = this._onEditEvent;
+        this.onDeleteEvent = this._onDeleteEvent;
+        this.getParams = this._getParams;
     }
     DrinkDetailComponent.prototype.ngOnInit = function () {
+        this.getParams();
+        this.id = this.params['id'];
+        this.getDrinkDetail(this.id);
+    };
+    DrinkDetailComponent.prototype.ngOnDestroy = function () {
+    };
+    DrinkDetailComponent.prototype._getParams = function () {
         var _this = this;
         this.sub = this.route
-            .params.subscribe(function (params) {
-            var id = +params['id'];
-            _this.id = id;
-            _this.getDrinkDetail(_this.id);
-        });
+            .params.subscribe(function (params) { return _this.params = params; });
     };
-    DrinkDetailComponent.prototype.getDrinkDetail = function (id) {
+    DrinkDetailComponent.prototype._getDrinkDetail = function (id) {
         var _this = this;
         this.drinkServices.getDrink(id)
             .subscribe(function (drink) { return _this.drink = drink; }, function (error) { return _this.errorMessage = error; });
     };
-    DrinkDetailComponent.prototype.onEditEvent = function (id) {
+    DrinkDetailComponent.prototype._onEditEvent = function (id) {
         this.router.navigate(["/drinks", "edit", id]);
     };
-    DrinkDetailComponent.prototype.onDeleteEvent = function (id) {
+    DrinkDetailComponent.prototype._onDeleteEvent = function (id) {
         var _this = this;
         this.drinkServices.deleteDrink(id)
             .subscribe(function (drink) {
             alert(drink.name + " is deleted");
             _this.router.navigate(['/']);
         }, function (error) { return _this.errorMessage = error; });
-    };
-    DrinkDetailComponent.prototype.ngOnDestroy = function () {
     };
     DrinkDetailComponent = __decorate([
         core_1.Component({

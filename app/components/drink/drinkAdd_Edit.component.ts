@@ -7,6 +7,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { Utils } from '../../common/utils';
 
+import { FormContainerComponent } from '../common/formContainer.component.ts';
 import { DrinkServices } from '../../services/drinkService';
 import { MaterialServices } from '../../services/materialService';
 
@@ -18,6 +19,26 @@ import * as _ from 'lodash';
 })
 
 export class DrinkAddEditComponent implements OnInit {
+    drink: Drink = new Drink();
+    sub: any;
+    id: number;
+    parentDrinks: Drink[] = new Array();
+    materials: Material[];
+    errorMessage: string;
+    params: any;
+
+    getDrinkDetail = this._getDrinkDetail;
+    getMaterials = this._getMaterials;
+    getDrinks = this._getDrinks;
+    onItemAdded = this._onItemAdded;
+    chooseMaterial = this._chooseMaterial;
+    removeMaterialFromDrink = this._removeMaterialFromDrink;
+    findIndex = this._findIndex;
+    editDrink = this._editDrink;
+    addDrink = this._addDrink;
+    goBack = this._goBack;
+    getParams = this._getParams;
+
     constructor(
         private drinkServices: DrinkServices
         , private materialServices: MaterialServices
@@ -26,33 +47,35 @@ export class DrinkAddEditComponent implements OnInit {
     ) {
 
     }
-    drink: Drink = new Drink();
-    sub: any;
-
-    id: number;
-    parentDrinks: Drink[] = new Array();
-    materials: Material[];
-    errorMessage: string;
-
     ngOnInit() {
         this.getMaterials();
         this.getDrinks();
         this.drink.materials = new Array<Material>();
+        this.getParams();
+        
+        if (this.id) {
+            this.getDrinkDetail(this.id);
+        }
+    }
 
+    onSubmit() {
+        if (this.id) {
+            this._editDrink(this.drink);
+        }
+        else {
+            this._addDrink(this.drink);
+        }
+    }
+
+    _getParams() {
         this.sub = this.route
             .params.subscribe(
             params => {
-                let id = +params['id'];
-                if (id) {
-
-                    this.id = id;
-                    this.getDrinkDetail(id);
-                }
-            }
-            )
+                this.id = params['id']
+            });
     }
 
-    getDrinkDetail(id: number) {
+    _getDrinkDetail(id: number) {
         this.drinkServices.getDrink(id)
             .subscribe(
             drink => this.drink = drink
@@ -60,7 +83,7 @@ export class DrinkAddEditComponent implements OnInit {
             )
     }
 
-    getMaterials() {
+    _getMaterials() {
         this.materialServices.getMaterials()
             .subscribe(
             materials => this.materials = materials
@@ -69,7 +92,7 @@ export class DrinkAddEditComponent implements OnInit {
 
     }
 
-    getDrinks() {
+    _getDrinks() {
         this.drinkServices.getDrinks()
             .subscribe(
             drinks => this.parentDrinks = drinks
@@ -77,12 +100,12 @@ export class DrinkAddEditComponent implements OnInit {
             )
     }
 
-    onItemAdded(id: number) {
-        this.chooseMaterial(id);
+    _onItemAdded(id: number) {
+        this._chooseMaterial(id);
     }
 
-    chooseMaterial(id: number) {
-        var matIndex = this.findIndex(this.materials, id);
+    _chooseMaterial(id: number) {
+        var matIndex = this._findIndex(this.materials, id);
 
         if (this.materials[matIndex]) {
             this.drink.materials.push(this.materials[matIndex]);
@@ -90,7 +113,7 @@ export class DrinkAddEditComponent implements OnInit {
         }
     }
 
-    removeMaterialFromDrink(id: number) {
+    _removeMaterialFromDrink(id: number) {
         var matIndex = this.findIndex(this.drink.materials, id);
 
         if (this.drink.materials[matIndex]) {
@@ -99,32 +122,22 @@ export class DrinkAddEditComponent implements OnInit {
         }
     }
 
-    findIndex(items: any[], id: number) {
+    _findIndex(items: any[], id: number) {
         return _.findIndex(items, function (e) {
             return e.id == id;
         });
     }
 
-    onSubmit() {
-        if(this.id) {
-            this.editDrink(this.drink);
-        }
-        else {
-            this.addDrink(this.drink);
-        }
-    }
-
-    editDrink(drink: Drink) {
+    _editDrink(drink: Drink) {
         this.drinkServices.editDrink(this.drink)
-        .subscribe(
+            .subscribe(
             drink => {
                 this.router.navigate(['/drinks', drink.id]);
             }
-            , error => this.errorMessage = error
-        )
+            , error => this.errorMessage = error);
     }
 
-    addDrink(drink: Drink) {
+    _addDrink(drink: Drink) {
 
         this.drinkServices.addDrink(this.drink)
             .subscribe(
@@ -135,7 +148,7 @@ export class DrinkAddEditComponent implements OnInit {
             )
     }
 
-    goBack() {
-        Utils.goBack(this.router);
+    _goBack() {
+        Utils.goBack();
     }
 }

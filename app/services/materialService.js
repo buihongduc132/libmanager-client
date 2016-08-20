@@ -32,6 +32,24 @@ var MaterialServices = (function () {
             .map(DAO_1.DAO.extractData)
             .catch(logs_1.Logs.handleError);
     };
+    MaterialServices.prototype.addMaterial = function (material) {
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        var options = new http_1.RequestOptions({ headers: headers });
+        return this.http.post(config_1.Config.host + "/" + config_1.Config.route.server.material, material, options)
+            .map(DAO_1.DAO.extractData)
+            .catch(logs_1.Logs.handleError);
+    };
+    MaterialServices.prototype.deleteMaterial = function (id) {
+        return this.http
+            .delete(config_1.Config.host + "/" + config_1.Config.route.server.material + "/" + id)
+            .map(DAO_1.DAO.extractData)
+            .catch(logs_1.Logs.handleError);
+    };
+    MaterialServices.prototype.editMaterial = function (material) {
+        return this.http.put(config_1.Config.host + "/" + config_1.Config.route.server.material + "/" + material.id, material)
+            .map(DAO_1.DAO.extractData)
+            .catch(logs_1.Logs.handleError);
+    };
     MaterialServices = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [http_1.Http])

@@ -12,8 +12,16 @@ import { Router } from '@angular/router';
 export class DisplayCommonDetailInfo {
     @Input() item: any;
     @Input() type: string;
+    @Input() backToList: boolean = false;
     @Output() onEditEvent = new EventEmitter<number>();
     @Output() onDeleteEvent = new EventEmitter<number>();
+
+    toList = this._toList;
+    isShowPrice = this._isShowPrice;
+    onEdit = this._onEdit;
+    onDelete = this._onDelete;
+    onBack = this._onBack;
+    goBack = this._goBack;
 
     constructor(
         private router: Router
@@ -21,19 +29,32 @@ export class DisplayCommonDetailInfo {
 
     }
 
-    toList() {
+    _toList() {
         this.router.navigate(['/'+this.type]);
     }
 
-    showPrice() {
+    _isShowPrice() {
         return this.item.price !== undefined;
     }
 
-    onEdit(id: number) {
+    _onEdit(id: number) {
         this.onEditEvent.emit(id);
     }
 
-    onDelete(id: number) {
+    _onDelete(id: number) {
         this.onDeleteEvent.emit(id);
+    }
+
+    _onBack() {
+        if(this.backToList) {
+            this.toList();
+        }
+        else {
+            this.goBack();
+        }
+    }
+
+    _goBack() {
+        Utils.goBack();
     }
 }

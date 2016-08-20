@@ -1,45 +1,33 @@
-<div class="container">
+<form-container formName="Drink">
+    <form (ngSubmit)="onSubmit()" #drinkForm="ngForm">
+        <form-input labelName="Name">
+            <input type="text" class="form-control" id="name" required name="name" [(ngModel)]="drink.name">
+        </form-input>
 
-    <div class="row">
-        <button (click)="goBack()" class="button-in-title btn btn-info col-xs-2">
-    <span class="glyphicon glyphicon-chevron-left"></span>
-    Back
-    </button>
-        <h2 class="col-xs-10">Form</h2>
-    </div>
+        <form-input labelName="Price">
+            <input type="number" class="form-control" id="price" required [(ngModel)]="drink.price" name="price">
+        </form-input>
 
-    <div class="row">
-        <form (ngSubmit)="onSubmit()" #drinkForm="ngForm">
-            <form-input labelName="Name">
-                <input type="text" class="form-control" id="name" required name="name" [(ngModel)]="drink.name">
-            </form-input>
-
-            <form-input labelName="Price">
-                <input type="number" class="form-control" id="price" required [(ngModel)]="drink.price" name="price">
-            </form-input>
-
-            <form-input labelName="Materials">
-                <select (change)="chooseMaterial($event.target.value)" id="materials" class="form-control">
+        <form-input labelName="Materials">
+            <select (change)="chooseMaterial($event.target.value)" id="materials" class="form-control">
                         <option>Please choose a Material</option>
                         <option *ngFor="let material of materials"
                         [value]="material.id">
                             {{ material.name }}
                         </option>
                     </select>
-            </form-input>
+        </form-input>
 
-            <div class="row">
-                <div class="col-xs-3" *ngFor="let material of drink.materials">
-                    <span class="btn btn-info" (click)="removeMaterialFromDrink(material.id)">
+        <div class="row">
+            <div class="col-xs-3" *ngFor="let material of drink.materials">
+                <span class="btn btn-info" (click)="removeMaterialFromDrink(material.id)">
                 {{ material.name }}
                 </span>
-                </div>
             </div>
+        </div>
 
-            <div class="row">
-                <button class="btn btn-success" type="submit" [disabled]="!drinkForm.form.valid">Submit</button>
-            </div>
-        </form>
-
-    </div>
-</div>
+        <div class="row">
+            <button class="btn btn-success" type="submit" [disabled]="!drinkForm.form.valid">Submit</button>
+        </div>
+    </form>
+</form-container>

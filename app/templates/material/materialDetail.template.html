@@ -1,2 +1,15 @@
-<display-common-detail-info
-[item]="material"></display-common-detail-info>
+<display-common-detail-info 
+[item]="material"
+type="materials"
+(onEditEvent)="onEditEvent($event)"
+(onDeleteEvent)="onDeleteEvent($event)"
+>
+
+<form-input labelName="Container">
+    <label>{{material.containerAmount}} {{material.unit}}</label>
+</form-input>
+
+<form-input labelName="Unit Price">
+    <label>{{material.price/material.containerAmount}}/{{material.unit}}</label>
+</form-input>
+</display-common-detail-info>

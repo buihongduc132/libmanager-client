@@ -12,6 +12,9 @@ from '../components/material/materialDetail.component';
 import { MaterialRootComponent }
 from '../components/material/materialRoot.component';
 
+import { MaterialAddEditComponent } 
+from '../components/material/materialAdd_Edit.component';
+
 import { Config } from '../config';
 
 const materialsRoutes: Routes = [
@@ -20,6 +23,14 @@ const materialsRoutes: Routes = [
         , component: MaterialRootComponent
         , children: [
             {
+                path: Config.route.client.commonAction.add
+                , component: MaterialAddEditComponent
+            }
+            , {
+                path: `${Config.route.client.commonAction.edit}/:id`
+                , component: MaterialAddEditComponent
+            }
+            , {
                 path: ':id'
                 , component: MaterialDetailComponent
             }
