@@ -69,7 +69,7 @@ export class MaterialDetailComponent implements OnInit, OnDestroy {
     }
 
     _onDeleteEvent(id: number) {
-        this.materialServices.deleteDrink(id)
+        this.materialServices.deleteMaterial(id)
         .subscribe(
             material => {
                 alert(`${material.name} is deleted`);

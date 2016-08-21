@@ -8,6 +8,7 @@ let config = {
 
     server: {
       drink: 'dish'
+      , drinkFullDetail: 'dishFullDetail'
       , material: 'material'
     }
     , client: {

@@ -97,7 +97,7 @@ export class MaterialAddEditComponent implements OnInit {
     }
 
     _deleteMaterial(id: number) {
-        this.materialServices.editMaterial(id)
+        this.materialServices.deleteMaterial(id)
             .subscribe(
             material => {
                 this.router.navigate(['/materials']);

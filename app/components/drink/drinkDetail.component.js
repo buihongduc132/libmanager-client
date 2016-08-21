@@ -22,6 +22,9 @@ var DrinkDetailComponent = (function () {
         this.onEditEvent = this._onEditEvent;
         this.onDeleteEvent = this._onDeleteEvent;
         this.getParams = this._getParams;
+        this.getUnitPrice = this._getUnitPrice;
+        this.getMaterialPrice = this._getMaterialPrice;
+        this.getTotalMaterialPrice = this._getTotalMaterialPrice;
     }
     DrinkDetailComponent.prototype.ngOnInit = function () {
         this.getParams();
@@ -30,6 +33,20 @@ var DrinkDetailComponent = (function () {
     };
     DrinkDetailComponent.prototype.ngOnDestroy = function () {
     };
+    DrinkDetailComponent.prototype._getTotalMaterialPrice = function () {
+        var _this = this;
+        var totalPrice = 0;
+        this.drink.dishMaterials.forEach(function (material) {
+            totalPrice += _this.getMaterialPrice(material);
+        });
+        return Math.ceil(totalPrice);
+    };
+    DrinkDetailComponent.prototype._getMaterialPrice = function (drinkMat) {
+        return this.getUnitPrice(drinkMat.material) * drinkMat.amount;
+    };
+    DrinkDetailComponent.prototype._getUnitPrice = function (material) {
+        return material.price / material.containerAmount;
+    };
     DrinkDetailComponent.prototype._getParams = function () {
         var _this = this;
         this.sub = this.route
@@ -37,15 +54,18 @@ var DrinkDetailComponent = (function () {
     };
     DrinkDetailComponent.prototype._getDrinkDetail = function (id) {
         var _this = this;
-        this.drinkServices.getDrink(id)
-            .subscribe(function (drink) { return _this.drink = drink; }, function (error) { return _this.errorMessage = error; });
+        return this.drinkServices.getDrinkWithMaterials(id)
+            .subscribe(function (drink) {
+            _this.drink = drink;
+            _this.totalPrice = _this.getTotalMaterialPrice();
+        }, function (error) { return _this.errorMessage = error; });
     };
     DrinkDetailComponent.prototype._onEditEvent = function (id) {
-        this.router.navigate(["/drinks", "edit", id]);
+        return this.router.navigate(["/drinks", "edit", id]);
     };
     DrinkDetailComponent.prototype._onDeleteEvent = function (id) {
         var _this = this;
-        this.drinkServices.deleteDrink(id)
+        return this.drinkServices.deleteDrink(id)
             .subscribe(function (drink) {
             alert(drink.name + " is deleted");
             _this.router.navigate(['/']);

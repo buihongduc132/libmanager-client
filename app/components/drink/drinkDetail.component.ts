@@ -5,6 +5,8 @@ import { DrinkServices } from '../../services/drinkService';
 import { DisplayCommonDetailInfo } from '../common/displayCommonDetailInfo.component';
 
 import { Drink } from '../../models/drink';
+import { Material } from '../../models/material';
+import { DrinkMaterial } from '../../models/drinkMaterial';
 
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -19,12 +21,16 @@ export class DrinkDetailComponent implements OnInit, OnDestroy {
     errorMessage: any;
     id: number;
     sub: any;
-    params: any; 
+    params: any;
+    totalPrice: number;
 
     getDrinkDetail = this._getDrinkDetail;
     onEditEvent = this._onEditEvent;
     onDeleteEvent = this._onDeleteEvent;
     getParams = this._getParams;
+    getUnitPrice = this._getUnitPrice;
+    getMaterialPrice = this._getMaterialPrice;
+    getTotalMaterialPrice = this._getTotalMaterialPrice;
 
     constructor(
         private drinkServices: DrinkServices
@@ -43,34 +49,55 @@ export class DrinkDetailComponent implements OnInit, OnDestroy {
 
     }
 
+    _getTotalMaterialPrice() {
+        var totalPrice = 0;
+
+        this.drink.dishMaterials.forEach(material => {
+                totalPrice += this.getMaterialPrice(material);
+        })
+
+        return Math.ceil(totalPrice);
+    }
+
+    _getMaterialPrice(drinkMat: DrinkMaterial) {
+        return this.getUnitPrice(drinkMat.material) * drinkMat.amount;
+    }
+
+    _getUnitPrice(material: Material) {
+        return material.price / material.containerAmount;
+    }
+
     _getParams() {
         this.sub = this.route
-        .params.subscribe(
+            .params.subscribe(
             params => this.params = params
-        );
+            );
     }
 
     _getDrinkDetail(id: number) {
-        this.drinkServices.getDrink(id)
-        .subscribe(
-            drink => this.drink = drink,
+        return this.drinkServices.getDrinkWithMaterials(id)
+            .subscribe(
+            drink => {
+                this.drink = drink;
+                this.totalPrice = this.getTotalMaterialPrice();
+            },
             error => this.errorMessage = error
-        )
+            );
     }
 
     _onEditEvent(id: number) {
-        this.router.navigate(["/drinks", "edit", id]);
+        return this.router.navigate(["/drinks", "edit", id]);
     }
 
     _onDeleteEvent(id: number) {
-        this.drinkServices.deleteDrink(id)
-        .subscribe(
+        return this.drinkServices.deleteDrink(id)
+            .subscribe(
             drink => {
                 alert(`${drink.name} is deleted`);
                 this.router.navigate(['/']);
             }
             , error => this.errorMessage = error
-        )
+            )
     }
 
 }

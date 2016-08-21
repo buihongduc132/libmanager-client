@@ -7,6 +7,7 @@ var config = {
     route: {
         server: {
             drink: 'dish',
+            drinkFullDetail: 'dishFullDetail',
             material: 'material'
         },
         client: {

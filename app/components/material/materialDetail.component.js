@@ -48,7 +48,7 @@ var MaterialDetailComponent = (function () {
     };
     MaterialDetailComponent.prototype._onDeleteEvent = function (id) {
         var _this = this;
-        this.materialServices.deleteDrink(id)
+        this.materialServices.deleteMaterial(id)
             .subscribe(function (material) {
             alert(material.name + " is deleted");
             _this.router.navigate(['/']);

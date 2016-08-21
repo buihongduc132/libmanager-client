@@ -6,9 +6,15 @@ type="drinks"
 >
     <!--Drink Details Go Here-->
     <button class="btn btn-info" 
-    [disabled] *ngFor="let mat of drink.materials"
-    [routerLink]="['/materials', mat.id]">
-        {{mat.name}}
+    [disabled] *ngFor="let drinkMat of drink.dishMaterials"
+    [routerLink]="['/materials', drinkMat.material.id]">
+        {{drinkMat.material.name}} - {{ drinkMat.amount}} {{drinkMat.material.unit}} - {{ getMaterialPrice(drinkMat) }}
     </button>
+    {{ totalPrice }}
+    <!--<ul>
+        <li *ngFor="let drinkMat of drink.dishMaterials">
+            {{ drinkMat.material.name }} - 
+        </li>
+    </ul>-->
 </display-common-detail-info>
 

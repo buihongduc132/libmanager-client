@@ -72,7 +72,7 @@ var MaterialAddEditComponent = (function () {
     };
     MaterialAddEditComponent.prototype._deleteMaterial = function (id) {
         var _this = this;
-        this.materialServices.editMaterial(id)
+        this.materialServices.deleteMaterial(id)
             .subscribe(function (material) {
             _this.router.navigate(['/materials']);
         }, function (error) { return _this.errorMessage = error; });

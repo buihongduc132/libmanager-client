@@ -30,6 +30,11 @@ var DrinkServices = (function () {
             .map(DAO_1.DAO.extractData)
             .catch(logs_1.Logs.handleError);
     };
+    DrinkServices.prototype.getDrinkWithMaterials = function (id) {
+        return this.http.get(config_1.Config.host + "/" + config_1.Config.route.server.drinkFullDetail + "/" + id)
+            .map(DAO_1.DAO.extractData)
+            .catch(logs_1.Logs.handleError);
+    };
     DrinkServices.prototype.editDrink = function (drink) {
         return this.http.put(config_1.Config.host + "/" + config_1.Config.route.server.drink + "/" + drink.id, drink)
             .map(DAO_1.DAO.extractData)

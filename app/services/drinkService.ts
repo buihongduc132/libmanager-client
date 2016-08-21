@@ -30,6 +30,12 @@ export class DrinkServices {
       .catch(Logs.handleError);
   }
 
+  getDrinkWithMaterials(id: number): Observable<Drink> {
+    return this.http.get(`${Config.host}/${Config.route.server.drinkFullDetail}/${id}`)
+      .map(DAO.extractData)
+      .catch(Logs.handleError);
+  }
+
   editDrink(drink: Drink): Observable<Drink> {
     return this.http.put(`${Config.host}/${Config.route.server.drink}/${drink.id}`, drink)
     .map(DAO.extractData)
