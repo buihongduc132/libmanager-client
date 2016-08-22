@@ -34,6 +34,9 @@ from '../components/common/listSkeleton.component';
 import { FormInputComponent }
 from '../components/common/formInput.component';
 
+import { FormInputCustomComponent }
+from '../components/common/formInputCustom.component';
+
 import { FormContainerComponent }
 from '../components/common/formContainer.component';
 
@@ -65,6 +68,7 @@ import { HttpModule
         , ListSkeletonComponent
         , FormInputComponent
         , FormContainerComponent
+        , FormInputCustomComponent
     ]
     , bootstrap: [
         AppComponent
