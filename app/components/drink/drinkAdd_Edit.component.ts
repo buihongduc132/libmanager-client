@@ -65,8 +65,8 @@ export class DrinkAddEditComponent implements OnInit {
             this.getDrinkDetail(this.id);
         }
         this.getMaterials();
-        this.getDrinks().add(;
 
+        console.log(this.amount);
     }
 
     onSubmit() {

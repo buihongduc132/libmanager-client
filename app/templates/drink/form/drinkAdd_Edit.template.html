@@ -19,7 +19,7 @@
                 <input class="form-control" type="text" disabled value="{{ mat.material.name }}">
             </div>
             <div class="col-xs-2">
-                <input class="form-control" type="text" name="mat.amount" [(ngModel)]="mat.amount">
+                <input class="form-control" type="text" name="amount{{mat.id}}" [(ngModel)]="mat.amount">
             </div>
         </form-input-custom>
 

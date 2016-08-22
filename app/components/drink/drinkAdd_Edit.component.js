@@ -52,7 +52,7 @@ var DrinkAddEditComponent = (function () {
             this.getDrinkDetail(this.id);
         }
         this.getMaterials();
-        this.getDrinks().add();
+        console.log(this.amount);
     };
     DrinkAddEditComponent.prototype.onSubmit = function () {
         // console.log(this.drink);
