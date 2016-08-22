@@ -5,11 +5,29 @@ type="drinks"
 (onDeleteEvent)="onDeleteEvent($event)"
 >
     <!--Drink Details Go Here-->
-    <button class="btn btn-info" 
-    [disabled] *ngFor="let drinkMat of drink.dishMaterials"
-    [routerLink]="['/materials', drinkMat.material.id]">
-        {{drinkMat.material.name}} - {{ drinkMat.amount}} {{drinkMat.material.unit}} - {{ getMaterialPrice(drinkMat) }}
-    </button>
-    {{ totalPrice }}
+    <div class="row form-group">
+        <h1>Material List</h1> 
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Material Name</th>
+                    <th>Amount</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr [routerLink]="['/materials', drinkMat.material.id]" *ngFor="let drinkMat of drink.dishMaterials">
+                    <td>{{drinkMat.material.name}}</td>
+                    <td>{{drinkMat.amount}} {{drinkMat.material.unit}}</td>
+                    <td>{{ getMaterialPrice(drinkMat) }}</td>
+                </tr>   
+                <tr>
+                    <td>                    </td>
+                    <td>Total Price:</td>
+                    <td>{{ totalPrice }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </display-common-detail-info>
 
