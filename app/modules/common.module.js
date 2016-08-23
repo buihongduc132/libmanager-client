@@ -9,62 +9,29 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var platform_browser_1 = require('@angular/platform-browser');
-var forms_1 = require('@angular/forms');
-var app_component_1 = require('../components/app.component');
-var app_routing_1 = require('../Routes/app.routing');
-var drinks_routing_1 = require('../Routes/drinks.routing');
-var materials_routing_1 = require('../Routes/materials.routing');
-var budget_routing_1 = require('../Routes/budget.routing');
-var drinks_module_1 = require('./drinks.module');
-var materials_module_1 = require('./materials.module');
-var budget_module_1 = require('./budget.module');
 var showList_component_1 = require('../components/common/showList.component');
 var displayCommonDetailInfo_component_1 = require('../components/common/displayCommonDetailInfo.component');
 var listSkeleton_component_1 = require('../components/common/listSkeleton.component');
 var formInput_component_1 = require('../components/common/formInput.component');
 var formInputCustom_component_1 = require('../components/common/formInputCustom.component');
 var formContainer_component_1 = require('../components/common/formContainer.component');
-var incomeNav_component_1 = require('../components/budget/income/incomeNav.component');
-var http_1 = require('@angular/http');
-var AppModule = (function () {
-    function AppModule() {
+var CommonModule = (function () {
+    function CommonModule() {
     }
-    AppModule = __decorate([
+    CommonModule = __decorate([
         core_1.NgModule({
-            imports: [
-                platform_browser_1.BrowserModule,
-                http_1.HttpModule,
-                http_1.JsonpModule,
-                forms_1.FormsModule,
-                app_routing_1.routing,
-                materials_routing_1.materialsRouting,
-                drinks_routing_1.drinksRouting,
-                budget_routing_1.budgetRouting,
-                materials_module_1.MaterialModule,
-                drinks_module_1.DrinkModule,
-                budget_module_1.BudgetModule
-            ],
-            providers: [
-                app_routing_1.appRoutingProviders
-            ],
             declarations: [
-                app_component_1.AppComponent,
                 showList_component_1.ShowListComponent,
                 displayCommonDetailInfo_component_1.DisplayCommonDetailInfo,
                 listSkeleton_component_1.ListSkeletonComponent,
                 formInput_component_1.FormInputComponent,
                 formContainer_component_1.FormContainerComponent,
-                formInputCustom_component_1.FormInputCustomComponent,
-                incomeNav_component_1.IncomeNavComponent
-            ],
-            bootstrap: [
-                app_component_1.AppComponent
+                formInputCustom_component_1.FormInputCustomComponent
             ]
         }), 
         __metadata('design:paramtypes', [])
-    ], AppModule);
-    return AppModule;
+    ], CommonModule);
+    return CommonModule;
 }());
-exports.AppModule = AppModule;
-//# sourceMappingURL=app.module.js.map
+exports.CommonModule = CommonModule;
+//# sourceMappingURL=common.module.js.map

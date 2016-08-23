@@ -19,8 +19,13 @@ from '../Routes/drinks.routing';
 import { materialsRouting }
 from '../Routes/materials.routing';
 
+import { budgetRouting } 
+from '../Routes/budget.routing';
+
 import { DrinkModule } from './drinks.module';
 import { MaterialModule } from './materials.module';
+
+import { BudgetModule } from './budget.module';
 
 import { ShowListComponent }
 from '../components/common/showList.component';
@@ -40,6 +45,8 @@ from '../components/common/formInputCustom.component';
 import { FormContainerComponent }
 from '../components/common/formContainer.component';
 
+import { IncomeNavComponent } from '../components/budget/income/incomeNav.component';
+
 import { HttpModule
     , JsonpModule
 } from '@angular/http';
@@ -54,9 +61,11 @@ import { HttpModule
         , routing
         , materialsRouting
         , drinksRouting
+        , budgetRouting
         
         , MaterialModule
         , DrinkModule
+        , BudgetModule
     ]
     , providers: [
         appRoutingProviders
@@ -69,6 +78,7 @@ import { HttpModule
         , FormInputComponent
         , FormContainerComponent
         , FormInputCustomComponent
+        , IncomeNavComponent
     ]
     , bootstrap: [
         AppComponent

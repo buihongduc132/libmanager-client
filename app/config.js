@@ -8,11 +8,27 @@ var config = {
         server: {
             drink: 'dish',
             drinkFullDetail: 'dishFullDetail',
-            material: 'material'
+            material: 'material',
+            dateIncome: 'dateIncome',
+            dateIncomeFullDetail: 'dateIncomeFullDetail'
         },
         client: {
             drink: 'drinks',
             material: 'materials',
+            budget: {
+                income: {
+                    daily: 'daily',
+                    monthly: 'monthly',
+                    yearly: 'yearly',
+                    url: 'income'
+                },
+                expense: {
+                    daily: 'daily',
+                    monthly: 'monthly',
+                    yearly: 'yearly',
+                    url: 'expense'
+                }
+            },
             commonAction: {
                 add: 'add',
                 edit: 'edit'
