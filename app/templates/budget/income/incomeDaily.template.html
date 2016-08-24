@@ -1,1 +1,66 @@
-Daily Income
+<!--<h1>Daily Income</h1>-->
+
+<a (click)="toggleMoreDetails()" class="btn btn-info">More Details</a>
+
+<a (click)="toggleDeleted()" class="btn btn-info">Toggle Deleted</a>
+
+<div class="row form-group">
+
+    <form (ngSubmit)="onSubmit()" #incomeForm="ngForm">
+        <div class="row">
+
+            <div class="col-xs-2">
+                Money: <input type="number" class="form-control" name="newIncome.total" [(ngModel)]="newIncome.total" required>
+            </div>
+
+            <div class="col-xs-2">
+                Payor:
+                <select class="form-control" name="" id="" name="newIncome.payor" [(ngModel)]="newIncome.payor" required>
+                    <option *ngFor="let person of people" [value]="person.id">
+                        {{ person.name }}
+                    </option>
+                </select>
+            </div>
+
+            <div class="col-xs-5">
+                <div class="col-xs-6">
+                    Year:
+                    <input required type="text" class="form-control" name="newIncome.yearActual" [(ngModel)]="newIncome.yearActual">
+                </div>
+                <div class="col-xs-3">
+                    Month:
+                    <input required type="text" class="form-control" name="newIncome.monthActual" [(ngModel)]="newIncome.monthActual">
+                </div>
+                <div class="col-xs-3">
+                    Day:
+                    <input required type="text" class="form-control" name="newIncome.dayActual" [(ngModel)]="newIncome.dayActual">
+                </div>
+            </div>
+            <button class="btn btn-success">Add</button>
+        </div>
+    </form>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <td>Money</td>
+                <td>Payor</td>
+                <td>Actual Date</td>
+                <td *ngIf="showMoreDetails">Date Generated</td>
+                <td *ngIf="showMoreDetails">Action</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr [hidden]="!showIncome(income.isDeleted)" *ngFor="let income of incomes">
+                <td>{{ income.total }}</td>
+                <td>{{ income.payor.name }}</td>
+                <td>{{ getDate(income.yearActual, income.monthActual, income.dayActual) }}</td>
+                <td *ngIf="showMoreDetails">{{ getDate(income.yearGen, income.monthGen, income.dayGen) }}</td>
+                <td *ngIf="showMoreDetails">
+                    <a *ngIf="!income.isDeleted" class="btn btn-danger" (click)="deleteIncome(income)">Delete</a>
+                    <a *ngIf="income.isDeleted" class="btn btn-success" (click)="enableIncome(income)">Enable</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

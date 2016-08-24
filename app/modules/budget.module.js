@@ -9,6 +9,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var budgetService_1 = require('../services/budgetService');
+var commonService_1 = require('../services/commonService');
 var BudgetModule = (function () {
     function BudgetModule() {
     }
@@ -16,7 +18,10 @@ var BudgetModule = (function () {
         core_1.NgModule({
             imports: [],
             declarations: [],
-            providers: []
+            providers: [
+                budgetService_1.BudgetServices,
+                commonService_1.CommonServices
+            ]
         }), 
         __metadata('design:paramtypes', [])
     ], BudgetModule);

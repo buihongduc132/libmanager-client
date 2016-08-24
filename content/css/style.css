@@ -1,3 +1,16 @@
 .button-in-title {
     margin-top:20px;
 }
+
+input[type="date"]::-webkit-calendar-picker-indicator{
+    display:inline-block;
+    float:right;
+    /*background-color:green;*/
+    width:50px;
+    height:100%;
+}
+input[type="date"]::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0;
+}

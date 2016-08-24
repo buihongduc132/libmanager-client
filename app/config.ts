@@ -10,8 +10,10 @@ let config = {
       drink: 'dish'
       , drinkFullDetail: 'dishFullDetail'
       , material: 'material'
-      , dateIncome: 'dateIncome'
-      , dateIncomeFullDetail: 'dateIncomeFullDetail'
+      , income: 'income'
+      , incomeFullDetail: 'incomeFullDetail'
+      , incomeLite: 'incomeLite'
+      , people: 'person'
     }
     , client: {
       drink: 'drinks'

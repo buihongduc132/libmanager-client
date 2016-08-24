@@ -5,12 +5,12 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var baseObject_1 = require('./baseObject');
-var MonthIncome = (function (_super) {
-    __extends(MonthIncome, _super);
-    function MonthIncome() {
+var IncomeDetail = (function (_super) {
+    __extends(IncomeDetail, _super);
+    function IncomeDetail() {
         _super.apply(this, arguments);
     }
-    return MonthIncome;
+    return IncomeDetail;
 }(baseObject_1.BaseObject));
-exports.MonthIncome = MonthIncome;
-//# sourceMappingURL=monthIncome.js.map
+exports.IncomeDetail = IncomeDetail;
+//# sourceMappingURL=incomeDetail.js.map

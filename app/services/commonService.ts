@@ -17,6 +17,8 @@ import { Config } from '../config';
 import { Logs } from '../common/logs';
 import { DAO } from '../common/DAO';
 
+import { Person } from '../models/person';
+
 @Injectable()
 export class CommonServices {
     constructor(private http: Http) {
@@ -24,4 +26,9 @@ export class CommonServices {
 
     }
 
+    getAllPerson(): Observable<Person[]> {
+        return this.http.get(`${Config.host}/${Config.route.server.people}`)
+        .map(DAO.extractData)
+        .catch(Logs.handleError);
+    }
 }
