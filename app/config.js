@@ -12,7 +12,9 @@ var config = {
             income: 'income',
             incomeFullDetail: 'incomeFullDetail',
             incomeLite: 'incomeLite',
-            people: 'person'
+            people: 'person',
+            isExistsIncome: 'isExistedIncome',
+            incomeDetail: 'incomeDetail'
         },
         client: {
             drink: 'drinks',

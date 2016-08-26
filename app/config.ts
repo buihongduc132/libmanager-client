@@ -14,6 +14,8 @@ let config = {
       , incomeFullDetail: 'incomeFullDetail'
       , incomeLite: 'incomeLite'
       , people: 'person'
+      , isExistsIncome: 'isExistedIncome'
+      , incomeDetail: 'incomeDetail'
     }
     , client: {
       drink: 'drinks'

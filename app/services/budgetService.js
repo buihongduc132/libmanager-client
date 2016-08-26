@@ -32,6 +32,16 @@ var BudgetServices = (function () {
         //TODO
         return;
     };
+    BudgetServices.prototype.editIncomeDetail = function (incomeDetail) {
+        return this.http.put(config_1.Config.host + "/" + config_1.Config.route.server.incomeDetail + "/" + incomeDetail.id, incomeDetail)
+            .map(DAO_1.DAO.extractData)
+            .catch(logs_1.Logs.handleError);
+    };
+    BudgetServices.prototype.getIncomesFullDetail = function () {
+        return this.http.get(config_1.Config.host + "/" + config_1.Config.route.server.incomeFullDetail)
+            .map(DAO_1.DAO.extractData)
+            .catch(logs_1.Logs.handleError);
+    };
     BudgetServices.prototype.getIncomes = function () {
         return this.http.get(config_1.Config.host + "/" + config_1.Config.route.server.income)
             .map(DAO_1.DAO.extractData)
@@ -46,6 +56,23 @@ var BudgetServices = (function () {
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         var options = new http_1.RequestOptions({ headers: headers });
         return this.http.post(config_1.Config.host + "/" + config_1.Config.route.server.income, income, options)
+            .map(DAO_1.DAO.extractData)
+            .catch(logs_1.Logs.handleError);
+    };
+    BudgetServices.prototype.isExistsIncome = function (incomeDate) {
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        var options = new http_1.RequestOptions({ headers: headers });
+        return this.http.post(config_1.Config.host + "/" + config_1.Config.route.server.isExistsIncome, incomeDate, options)
+            .map(function (res) {
+            return res.json();
+        })
+            .catch(logs_1.Logs.handleError);
+    };
+    BudgetServices.prototype.addIncomeDetail = function (incomeDetail) {
+        alert(incomeDetail);
+        var headers = new http_1.Headers({ 'Content-type': 'application/json' });
+        var options = new http_1.RequestOptions({ headers: headers });
+        return this.http.post(config_1.Config.host + "/" + config_1.Config.route.server.incomeDetail, incomeDetail, options)
             .map(DAO_1.DAO.extractData)
             .catch(logs_1.Logs.handleError);
     };

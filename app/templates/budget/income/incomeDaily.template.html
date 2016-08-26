@@ -5,62 +5,118 @@
 <a (click)="toggleDeleted()" class="btn btn-info">Toggle Deleted</a>
 
 <div class="row form-group">
-
-    <form (ngSubmit)="onSubmit()" #incomeForm="ngForm">
-        <div class="row">
-
-            <div class="col-xs-2">
-                Money: <input type="number" class="form-control" name="newIncome.total" [(ngModel)]="newIncome.total" required>
-            </div>
-
-            <div class="col-xs-2">
-                Payor:
-                <select class="form-control" name="" id="" name="newIncome.payor" [(ngModel)]="newIncome.payor" required>
-                    <option *ngFor="let person of people" [value]="person.id">
-                        {{ person.name }}
-                    </option>
-                </select>
-            </div>
-
-            <div class="col-xs-5">
-                <div class="col-xs-6">
-                    Year:
-                    <input required type="text" class="form-control" name="newIncome.yearActual" [(ngModel)]="newIncome.yearActual">
-                </div>
-                <div class="col-xs-3">
-                    Month:
-                    <input required type="text" class="form-control" name="newIncome.monthActual" [(ngModel)]="newIncome.monthActual">
-                </div>
-                <div class="col-xs-3">
-                    Day:
-                    <input required type="text" class="form-control" name="newIncome.dayActual" [(ngModel)]="newIncome.dayActual">
-                </div>
-            </div>
-            <button class="btn btn-success">Add</button>
+    <!--<form (ngSubmit)="onSubmit()" #incomeForm="ngForm">-->
+    <div class="row">
+        <div class="col-xs-4">
+            Year :
+            <input type="number" class="form-control" name="newIncomeDate.year" [(ngModel)]="newIncomeDate.year">
         </div>
-    </form>
+        <div class="col-xs-3">
+            Month :
+            <input type="number" class="form-control" name="newIncomeDate.month" [(ngModel)]="newIncomeDate.month">
+        </div>
+        <div class="col-xs-3">
+            Day :
+            <input type="number" class="form-control" name="newIncomeDate.day" [(ngModel)]="newIncomeDate.day">
+        </div>
+        <div class="col-xs-2">
+            <a (click)="onAddIncome()" class="btn btn-success">Add</a>
+        </div>
+    </div>
+    <!--</form>-->
 
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <td>Money</td>
-                <td>Payor</td>
-                <td>Actual Date</td>
-                <td *ngIf="showMoreDetails">Date Generated</td>
-                <td *ngIf="showMoreDetails">Action</td>
-            </tr>
-        </thead>
-        <tbody>
-            <tr [hidden]="!showIncome(income.isDeleted)" *ngFor="let income of incomes">
-                <td>{{ income.total }}</td>
-                <td>{{ income.payor.name }}</td>
-                <td>{{ getDate(income.yearActual, income.monthActual, income.dayActual) }}</td>
-                <td *ngIf="showMoreDetails">{{ getDate(income.yearGen, income.monthGen, income.dayGen) }}</td>
-                <td *ngIf="showMoreDetails">
-                    <a *ngIf="!income.isDeleted" class="btn btn-danger" (click)="deleteIncome(income)">Delete</a>
-                    <a *ngIf="income.isDeleted" class="btn btn-success" (click)="enableIncome(income)">Enable</a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <div *ngFor="let income of incomes">
+        <div class="row">
+            <div class="row">
+                <div class="col-xs-3">
+                    <label>{{ getDate(income.yearActual, income.monthActual, income.dayActual) }}</label>
+                </div>
+                <div class="col-xs-1">
+                    <label>{{getTotal(income)}}</label>
+                </div>
+                <div class="col-xs-3">
+                    <a (click)="toggleDetail(income.id)" class="btn btn-info">Details</a>
+
+                    <a (click)="editIncome(income.id)" class="btn btn-info">Edit</a>
+                </div>
+            </div>
+            <div *ngIf="toggledDetail == income.id" class="row">
+                <div
+                [ngClass]="{
+                'disable-income': detail.isDeleted}" 
+                class="row" *ngFor="let detail of income.IncomeDetails">
+                    <div class="col-xs-3">
+                        {{ detail.Dish.name }}
+                    </div>
+
+                    <div class="col-xs-1">
+                        {{ detail.price }}
+                    </div>
+
+                    <div class="col-xs-1">
+                        {{ detail.discount }}%
+                    </div>
+
+                    <div class="col-xs-1">
+                        {{ detail.price * (100 - detail.discount) / 100 }}
+                    </div>
+
+                    <div class="col-xs-1">
+                        {{ detail.keeper.name }}
+                    </div>
+
+                    <div>
+                        <a *ngIf="detail.isDeleted" (click)="enableIncomeDetail(detail.id)">Enable</a>
+                        <a *ngIf="!detail.isDeleted" (click)="deleteIncomeDetail(detail.id)">Delete</a>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-3">
+                        Drink: 
+                        <select class="form-control" 
+                        name="newIncomeDetail.Dish"
+                        (change)="selectDrink($event.target.value)">
+                        <option value=""></option>
+                            <option [value]="drink.id"
+                            [selected]="drink.id == selectedDrink.id"
+                            *ngFor="let drink of drinks">
+                                {{ drink.name }}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col-xs-2">
+                        Price: 
+                        <input type="text" class="form-control"
+                        name="newIncomeDetail.price"
+                        [(ngModel)]="newIncomeDetail.price" >asdasd
+                    </div>
+                    <div class="col-xs-2">
+                        Discount: 
+                        <input type="text"
+                        class="form-control"
+                        [(ngModel)]="newIncomeDetail.discount">
+                    </div>
+                    <div class="col-xs-2">
+                        Keeper: 
+                        <select name="newIncomeDetail.keeper" class="form-control"
+                        (change)="selectKeeper($event.target.value)">
+                            <option value=""></option>
+                            <option [value]="person.id" *ngFor="let person of people"
+                            [selected]="person.id == selectedKeeper">
+                                {{person.name}}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="col-xs-2">
+                        Final Price: <input type="text" class="form-control" disabled [value]="getTotalPrice()">
+                    </div>
+                    <div class="col-xs-2">
+                        <a (click)="onAddNewDetail(income.id)" class="btn btn-success">Add Drink {{income.id}}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
