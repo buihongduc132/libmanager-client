@@ -164,23 +164,6 @@ domain:'http://web.zaloapp.com/',
                             })
         </script>
         <script type="text/javascript" src="http://stc.web.zalo.zdn.vn/js/zweb-core-min-1.63.js"></script>
-        <script type="text/javascript">
-                            ZWebCore.verifyUser("zweb_qr_login");</script>
-        <script type="text/javascript">
-            (function(i, s, o, g, r, a, m){i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function(){
-            (i[r].q = i[r].q || []).push(arguments)}, i[r].l = 1 * new Date(); a = s.createElement(o),
-                    m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-            ga('create', 'UA-35648122-15', 'auto');
-            ga('send', 'pageview');</script>
-        <script type="text/javascript">
-            var _zap = _zap || [];
-            _zap.push(["_setAccount", "ZA-43050703550082"]);
-            (function(e, t, n, r, a, c, o){
-            e[a + "_q"] = e[a + "_q"] || [], e[a] = e[a] || {}; var s = ["trackPageview", "trackEvent", "getVisitorID"];
-            for (i in s)e[a][s[i]] = function(t){return function(){e[a + "_q"].push([t, arguments])}}(s[i]);
-            c = t.createElement(n), o = t.getElementsByTagName(n)[0], c.async = 1, c.src = r, o.parentNode.insertBefore(c, o)
-            })(window, document, "script", "http://stc.za.zaloapp.com/stag-za.js", "ZA");
-        </script>
+       
     </body>
 </html>
