@@ -4,6 +4,12 @@
 
 <a (click)="toggleDeleted()" class="btn btn-info">Toggle Deleted</a>
 
+<a (click)="toggleDeletedDetail()" class="btn btn-info">Toggle Deleted Detail</a>
+
+{{showDeletedDetail}}
+{{ true && showDeletedDetail }}
+{{ false && showDeletedDetail }}
+
 <div class="row form-group">
     <!--<form (ngSubmit)="onSubmit()" #incomeForm="ngForm">-->
     <div class="row">
@@ -29,19 +35,20 @@
         <div class="row">
             <div class="row">
                 <div class="col-xs-3">
-                    <label>{{ getDate(income.yearActual, income.monthActual, income.dayActual) }}</label>
+                    <a class="btn btn-info col-xs-12" 
+
+                    (click)="toggleDetail(income.id)">
+                        {{ getDate(income.yearActual, income.monthActual, income.dayActual) }}
+                    </a>
                 </div>
                 <div class="col-xs-1">
                     <label>{{getTotal(income)}}</label>
                 </div>
-                <div class="col-xs-3">
-                    <a (click)="toggleDetail(income.id)" class="btn btn-info">Details</a>
-
-                    <a (click)="editIncome(income.id)" class="btn btn-info">Edit</a>
-                </div>
             </div>
             <div *ngIf="toggledDetail == income.id" class="row">
-                <div [ngClass]="{
+                <div
+                [hidden]="!isShowDeletedDetail(detail)" 
+                [ngClass]="{
                 'disable-income': detail.isDeleted}" class="row" *ngFor="let detail of income.IncomeDetails">
                     <div class="col-xs-2">
                         {{ detail.Dish.name }}
@@ -98,7 +105,7 @@
                     </div>
                     <div class="col-xs-2">
                         Price:
-                        <input type="text" class="form-control" name="newIncomeDetail.price" [(ngModel)]="newIncomeDetail.price">asdasd
+                        <input type="text" class="form-control" name="newIncomeDetail.price" [(ngModel)]="newIncomeDetail.price">
                     </div>
                     <div class="col-xs-2">
                         Discount:
@@ -116,10 +123,10 @@
                     </div>
 
                     <div class="col-xs-2">
-                        Final Price: <input type="text" class="form-control" disabled [value]="getTotalPrice()">
+                        Final Price: <input type="text" class="form-control" disabled [value]="getFinalDetailPrice()">
                     </div>
                     <div class="col-xs-2">
-                        <a (click)="onAddNewDetail(income.id)" class="btn btn-success">Add Drink {{income.id}}</a>
+                        <a (click)="onAddNewDetail(income.id)" class="btn btn-success">Add Drink</a>
                     </div>
                 </div>
             </div>

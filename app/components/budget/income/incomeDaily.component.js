@@ -1,3 +1,5 @@
+// TODO : Filtering
+// TODO : Sort by Date.
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -16,6 +18,7 @@ var income_1 = require('../../../models/income');
 var incomeDetail_1 = require('../../../models/incomeDetail');
 var person_1 = require('../../../models/person');
 var drink_1 = require('../../../models/drink');
+var utils_1 = require('../../../common/utils');
 var _ = require('lodash');
 var IncomeDailyComponent = (function () {
     function IncomeDailyComponent(budgetServices, commonServices, drinkServices) {
@@ -43,19 +46,23 @@ var IncomeDailyComponent = (function () {
         this.getSelectDrink = this._getSelectDrink; //
         this.selectDrink = this._selectDrink; //
         this.selectKeeper = this._selectKeeper; //
-        this.getTotalPrice = this._getTotalPrice;
+        this.getFinalDetailPrice = this._getFinalDetailPrice;
         this.onAddNewDetail = this._onAddNewDetail;
         this.isExistsIncome = this._isExistsIncome;
         this.addOneDay = this._addOneDay;
         this.isValidIncome = this._isValidIncome;
+        this.isValidIncomeDetail = this._isValidIncomeDetail;
         this.deleteIncomeDetail = this._deleteIncomeDetail;
         this.enableIncomeDetail = this._enableIncomeDetail;
-        this.prepareAddNewIncome = this._prepareAddNewIncome;
+        this.prepareAddNewIncomeDetail = this._prepareAddNewIncomeDetail;
         this.getSelectedKeeper = this._getSelectedKeeper;
         this.toggleNoting = this._toggleNoting;
         this.updateIncomeDetail = this._updateIncomeDetail;
         this.resetEditingNote = this._resetEditingNote;
         this.showFirstNChars = this._showFirstNChars;
+        this.editIncome = this._editIncome;
+        this.toggleDeletedDetail = this._toggleDeletedDetail;
+        this.isShowDeletedDetail = this._isShowDeletedDetail;
     }
     IncomeDailyComponent.prototype.ngOnInit = function () {
         this.getIncomes();
@@ -65,6 +72,7 @@ var IncomeDailyComponent = (function () {
         this.newIncomeDetail = this._initNewIncomeDetail();
         this.showMoreDetails = false;
         this.showDeletedDate = false;
+        this.showDeletedDetail = false;
         this.toggledDetail = -1;
         this.editingNote = -1;
         this.selectedDrink = new drink_1.Drink();
@@ -72,14 +80,14 @@ var IncomeDailyComponent = (function () {
     IncomeDailyComponent.prototype.onSubmit = function () {
         this.getIncomes();
     };
+    IncomeDailyComponent.prototype._isShowDeletedDetail = function (detail) {
+        return !detail.isDeleted || this.showDeletedDetail;
+    };
+    IncomeDailyComponent.prototype._toggleDeletedDetail = function () {
+        this.showDeletedDetail = !this.showDeletedDetail;
+    };
     IncomeDailyComponent.prototype._showFirstNChars = function (text, numberOfChar) {
-        if (numberOfChar === void 0) { numberOfChar = 20; }
-        if (text) {
-            return text.length < numberOfChar ? text : text.substr(0, numberOfChar) + " ...";
-        }
-        else {
-            return '';
-        }
+        return utils_1.Utils.showFirstNChars(text, numberOfChar);
     };
     IncomeDailyComponent.prototype._toggleNoting = function (detailId) {
         if (detailId == this.editingNote) {
@@ -120,7 +128,7 @@ var IncomeDailyComponent = (function () {
             _this.getIncomes();
         }, function (err) { return _this.err = err; });
     };
-    IncomeDailyComponent.prototype._getTotalPrice = function () {
+    IncomeDailyComponent.prototype._getFinalDetailPrice = function () {
         return this.newIncomeDetail.price * ((100 - this.newIncomeDetail.discount) / 100);
     };
     IncomeDailyComponent.prototype._selectKeeper = function (id) {
@@ -141,24 +149,42 @@ var IncomeDailyComponent = (function () {
         }, function (err) { return _this.err = err; });
     };
     IncomeDailyComponent.prototype._onAddNewDetail = function (incomeId) {
+        var preparedNewIncomeDetail = this.prepareAddNewIncomeDetail();
+        if (this.isValidIncomeDetail(preparedNewIncomeDetail)) {
+            var currentIncome = _.find(this.incomes, ['id', incomeId]);
+            currentIncome.IncomeDetails.push(this.newIncomeDetail);
+            this.editIncome(currentIncome);
+        }
+        else {
+            alert("Missing income detail");
+        }
+    };
+    IncomeDailyComponent.prototype._editIncome = function (income) {
         var _this = this;
-        var preparedNewIncome = this.prepareAddNewIncome(incomeId);
-        console.log(preparedNewIncome);
-        this.budgetServices.editIncome(preparedNewIncome)
+        this.budgetServices.editIncome(income)
             .subscribe(function (income) {
             _this.getIncomes();
         }, function (err) { return _this.err = err; });
     };
     IncomeDailyComponent.prototype._isValidIncome = function (income) {
-        return true;
+        return income.dayActual &&
+            income.monthActual &&
+            income.yearActual &&
+            income.dayGen &&
+            income.monthGen &&
+            income.yearGen;
     };
-    IncomeDailyComponent.prototype._prepareAddNewIncome = function (incomeId) {
+    IncomeDailyComponent.prototype._isValidIncomeDetail = function (incomeDetail) {
+        return incomeDetail.discount != null &&
+            incomeDetail.Dish &&
+            incomeDetail.keeper &&
+            incomeDetail.price != null;
+    };
+    IncomeDailyComponent.prototype._prepareAddNewIncomeDetail = function () {
         this.newIncomeDetail.Dish = this.selectedDrink;
         this.newIncomeDetail.keeper = this.getSelectedKeeper();
         this.newIncomeDetail.isDeleted = false;
-        var currentIncome = _.find(this.incomes, ['id', incomeId]);
-        currentIncome.IncomeDetails.push(this.newIncomeDetail);
-        return currentIncome;
+        return this.newIncomeDetail;
     };
     IncomeDailyComponent.prototype._getSelectedKeeper = function () {
         for (var i = 0; i < this.people.length; i++) {
@@ -177,11 +203,13 @@ var IncomeDailyComponent = (function () {
     };
     IncomeDailyComponent.prototype._getTotal = function (income) {
         var total = 0;
-        income.IncomeDetails.forEach(function (detail) {
-            if (!detail.isDeleted) {
-                total += detail.price * (100 - detail.discount) / 100;
-            }
-        });
+        if (income.IncomeDetails) {
+            income.IncomeDetails.forEach(function (detail) {
+                if (!detail.isDeleted) {
+                    total += detail.price * (100 - detail.discount) / 100;
+                }
+            });
+        }
         return total;
     };
     IncomeDailyComponent.prototype._isExistsIncome = function (income) {
@@ -195,9 +223,11 @@ var IncomeDailyComponent = (function () {
     };
     IncomeDailyComponent.prototype._addIncome = function (income) {
         var _this = this;
+        income.total = this.getTotal(income);
         this.budgetServices.addIncome(income)
             .subscribe(function (income) {
             _this.getIncomes();
+            console.log(_this.incomes);
         }, function (err) { return _this.err = err; });
     };
     IncomeDailyComponent.prototype._initNewDate = function () {
@@ -229,8 +259,13 @@ var IncomeDailyComponent = (function () {
         this.isExistsIncome(newIncome)
             .subscribe(function (isExisted) {
             if (!isExisted) {
-                _this.incomes.push(newIncome);
-                _this.addIncome(newIncome);
+                if (_this.isValidIncome(newIncome)) {
+                    _this.incomes.push(newIncome);
+                    _this.addIncome(newIncome);
+                }
+                else {
+                    alert('Missing Income Info, please check again');
+                }
             }
             else {
                 alert("Income already exists");

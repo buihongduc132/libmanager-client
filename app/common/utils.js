@@ -2,6 +2,15 @@
 var Utils = (function () {
     function Utils() {
     }
+    Utils.showFirstNChars = function (text, numberOfChar) {
+        if (numberOfChar === void 0) { numberOfChar = 20; }
+        if (text) {
+            return text.length < numberOfChar ? text : text.substr(0, numberOfChar) + " ...";
+        }
+        else {
+            return '';
+        }
+    };
     Utils.CurrentDate = function () {
         return new Date().toLocaleDateString();
     };

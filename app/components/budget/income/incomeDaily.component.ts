@@ -1,3 +1,6 @@
+// TODO : Filtering
+// TODO : Sort by Date.
+
 
 import { Component, OnInit } from '@angular/core'
 import { BudgetServices } from '../../../services/budgetService';
@@ -8,6 +11,8 @@ import { Income } from '../../../models/income';
 import { IncomeDetail } from '../../../models/incomeDetail';
 import { Person } from '../../../models/person';
 import { Drink } from '../../../models/drink';
+
+import { Utils } from '../../../common/utils';
 
 import * as _ from 'lodash';
 
@@ -25,6 +30,7 @@ export class IncomeDailyComponent {
     drinks: Drink[];
     showMoreDetails: boolean;
     showDeletedDate: boolean;
+    showDeletedDetail: boolean;
     toggledDetail: number;
 
     newIncomeDetail: IncomeDetail;
@@ -58,21 +64,25 @@ export class IncomeDailyComponent {
     getSelectDrink = this._getSelectDrink; //
     selectDrink = this._selectDrink; //
     selectKeeper = this._selectKeeper; //
-    getTotalPrice = this._getTotalPrice;
+    getFinalDetailPrice = this._getFinalDetailPrice;
     onAddNewDetail = this._onAddNewDetail;
 
     isExistsIncome = this._isExistsIncome;
     addOneDay = this._addOneDay;
     isValidIncome = this._isValidIncome;
+    isValidIncomeDetail = this._isValidIncomeDetail;
     deleteIncomeDetail = this._deleteIncomeDetail;
     enableIncomeDetail = this._enableIncomeDetail;
 
-    prepareAddNewIncome = this._prepareAddNewIncome;
+    prepareAddNewIncomeDetail = this._prepareAddNewIncomeDetail;
     getSelectedKeeper = this._getSelectedKeeper;
     toggleNoting = this._toggleNoting;
     updateIncomeDetail = this._updateIncomeDetail;
     resetEditingNote = this._resetEditingNote;
     showFirstNChars = this._showFirstNChars;
+    editIncome = this._editIncome;
+    toggleDeletedDetail = this._toggleDeletedDetail;
+    isShowDeletedDetail = this._isShowDeletedDetail;
 
     ngOnInit() {
         this.getIncomes();
@@ -82,6 +92,7 @@ export class IncomeDailyComponent {
         this.newIncomeDetail = this._initNewIncomeDetail();
         this.showMoreDetails = false;
         this.showDeletedDate = false;
+        this.showDeletedDetail = false;
         this.toggledDetail = -1;
         this.editingNote = -1;
         this.selectedDrink = new Drink();
@@ -91,13 +102,16 @@ export class IncomeDailyComponent {
         this.getIncomes();
     }
 
-    _showFirstNChars(text: string, numberOfChar: number = 20) {
-        if(text) {
-            return text.length < numberOfChar ? text : `${text.substr(0,numberOfChar)} ...`;
-        }
-        else {
-            return '';
-        }
+    _isShowDeletedDetail(detail: IncomeDetail) {
+        return !detail.isDeleted || this.showDeletedDetail
+    }
+
+    _toggleDeletedDetail() {
+        this.showDeletedDetail = !this.showDeletedDetail;
+    }
+
+    _showFirstNChars(text: string, numberOfChar: number) {
+        return Utils.showFirstNChars(text, numberOfChar);
     }
 
     _toggleNoting(detailId: number) {
@@ -154,7 +168,7 @@ export class IncomeDailyComponent {
     }
 
 
-    _getTotalPrice() {
+    _getFinalDetailPrice() {
         return this.newIncomeDetail.price * ((100 - this.newIncomeDetail.discount) / 100);
     }
 
@@ -181,9 +195,19 @@ export class IncomeDailyComponent {
     }
 
     _onAddNewDetail(incomeId: number) {
-        var preparedNewIncome = this.prepareAddNewIncome(incomeId);
-        console.log(preparedNewIncome);
-        this.budgetServices.editIncome(preparedNewIncome)
+        var preparedNewIncomeDetail = this.prepareAddNewIncomeDetail();
+        if (this.isValidIncomeDetail(preparedNewIncomeDetail)) {
+            let currentIncome = _.find(this.incomes, ['id', incomeId]);
+            currentIncome.IncomeDetails.push(this.newIncomeDetail);
+            this.editIncome(currentIncome);
+        }
+        else {
+            alert("Missing income detail");
+        }
+    }
+
+    _editIncome(income: Income) {
+        this.budgetServices.editIncome(income)
             .subscribe(
             income => {
                 this.getIncomes();
@@ -192,17 +216,29 @@ export class IncomeDailyComponent {
             )
     }
 
+
     _isValidIncome(income: Income) {
-        return true;
+        return income.dayActual &&
+            income.monthActual &&
+            income.yearActual &&
+            income.dayGen &&
+            income.monthGen &&
+            income.yearGen;
     }
 
-    _prepareAddNewIncome(incomeId: number) {
+    _isValidIncomeDetail(incomeDetail: IncomeDetail) {
+        return incomeDetail.discount != null &&
+            incomeDetail.Dish &&
+            incomeDetail.keeper &&
+            incomeDetail.price != null;
+    }
+
+    _prepareAddNewIncomeDetail() {
         this.newIncomeDetail.Dish = this.selectedDrink;
         this.newIncomeDetail.keeper = this.getSelectedKeeper();
         this.newIncomeDetail.isDeleted = false;
-        let currentIncome = _.find(this.incomes, ['id', incomeId]);
-        currentIncome.IncomeDetails.push(this.newIncomeDetail);
-        return currentIncome;
+
+        return this.newIncomeDetail;
     }
 
     _getSelectedKeeper() {
@@ -225,11 +261,15 @@ export class IncomeDailyComponent {
 
     _getTotal(income: Income) {
         var total = 0;
-        income.IncomeDetails.forEach(detail => {
-            if (!detail.isDeleted) {
-                total += detail.price * (100 - detail.discount) / 100;
-            }
-        })
+
+        if (income.IncomeDetails) {
+
+            income.IncomeDetails.forEach(detail => {
+                if (!detail.isDeleted) {
+                    total += detail.price * (100 - detail.discount) / 100;
+                }
+            });
+        }
 
         return total;
     }
@@ -246,13 +286,14 @@ export class IncomeDailyComponent {
     }
 
     _addIncome(income: Income) {
+        income.total = this.getTotal(income);
         this.budgetServices.addIncome(income)
             .subscribe(
             income => {
-                this.getIncomes()
+                this.getIncomes();
+                console.log(this.incomes);
             }
-            , err => this.err = err
-            )
+            , err => this.err = err)
     }
 
     _initNewDate() {
@@ -290,8 +331,13 @@ export class IncomeDailyComponent {
         this.isExistsIncome(newIncome)
             .subscribe(isExisted => {
                 if (!isExisted) {
-                    this.incomes.push(newIncome);
-                    this.addIncome(newIncome);
+                    if (this.isValidIncome(newIncome)) {
+                        this.incomes.push(newIncome);
+                        this.addIncome(newIncome);
+                    }
+                    else {
+                        alert('Missing Income Info, please check again');
+                    }
                 }
                 else {
                     alert("Income already exists");

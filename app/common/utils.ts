@@ -35,4 +35,13 @@ export class Utils {
 
         return arr;
     }
+
+    public static showFirstNChars(text: string, numberOfChar: number = 20) {
+        if (text) {
+            return text.length < numberOfChar ? text : `${text.substr(0, numberOfChar)} ...`;
+        }
+        else {
+            return '';
+        }
+    }
 }
