@@ -41,11 +41,9 @@
                 </div>
             </div>
             <div *ngIf="toggledDetail == income.id" class="row">
-                <div
-                [ngClass]="{
-                'disable-income': detail.isDeleted}" 
-                class="row" *ngFor="let detail of income.IncomeDetails">
-                    <div class="col-xs-3">
+                <div [ngClass]="{
+                'disable-income': detail.isDeleted}" class="row" *ngFor="let detail of income.IncomeDetails">
+                    <div class="col-xs-2">
                         {{ detail.Dish.name }}
                     </div>
 
@@ -65,18 +63,31 @@
                         {{ detail.keeper.name }}
                     </div>
 
-                    <div>
-                        <a *ngIf="detail.isDeleted" (click)="enableIncomeDetail(detail.id)">Enable</a>
-                        <a *ngIf="!detail.isDeleted" (click)="deleteIncomeDetail(detail.id)">Delete</a>
+                    <div class="col-xs-4">
+                        <a class="btn btn-info" (mouseover)="toggleNoting(detail.id)" 
+                        *ngIf="editingNote != detail.id">
+                            {{ showFirstNChars(detail.note) || 'Note' }}
+                        </a>
+                        <textarea *ngIf="editingNote == detail.id" class="form-control" cols="30" rows="2"
+                        name="detail.note"
+                        [(ngModel)]="detail.note">{{ detail.note }}</textarea>
+                    </div>
+
+                    <div class="col-xs-2">
+                        <div class="row">
+                            <a class="col-xs-12 btn btn-danger" *ngIf="!detail.isDeleted" (click)="deleteIncomeDetail(detail.id)">Delete</a>
+                            <a class="col-xs-12 btn btn-success" *ngIf="detail.isDeleted" (click)="enableIncomeDetail(detail.id)">Enable</a>
+                        </div>
+                        <div class="row">
+                            <a class="col-xs-12 btn btn-primary" (click)="updateIncomeDetail(detail)">Update</a>
+                        </div>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-xs-3">
-                        Drink: 
-                        <select class="form-control" 
-                        name="newIncomeDetail.Dish"
-                        (change)="selectDrink($event.target.value)">
+                        Drink:
+                        <select class="form-control" name="newIncomeDetail.Dish" (change)="selectDrink($event.target.value)">
                         <option value=""></option>
                             <option [value]="drink.id"
                             [selected]="drink.id == selectedDrink.id"
@@ -86,21 +97,16 @@
                         </select>
                     </div>
                     <div class="col-xs-2">
-                        Price: 
-                        <input type="text" class="form-control"
-                        name="newIncomeDetail.price"
-                        [(ngModel)]="newIncomeDetail.price" >asdasd
+                        Price:
+                        <input type="text" class="form-control" name="newIncomeDetail.price" [(ngModel)]="newIncomeDetail.price">asdasd
                     </div>
                     <div class="col-xs-2">
-                        Discount: 
-                        <input type="text"
-                        class="form-control"
-                        [(ngModel)]="newIncomeDetail.discount">
+                        Discount:
+                        <input type="text" class="form-control" [(ngModel)]="newIncomeDetail.discount">
                     </div>
                     <div class="col-xs-2">
-                        Keeper: 
-                        <select name="newIncomeDetail.keeper" class="form-control"
-                        (change)="selectKeeper($event.target.value)">
+                        Keeper:
+                        <select name="newIncomeDetail.keeper" class="form-control" (change)="selectKeeper($event.target.value)">
                             <option value=""></option>
                             <option [value]="person.id" *ngFor="let person of people"
                             [selected]="person.id == selectedKeeper">
@@ -118,5 +124,26 @@
                 </div>
             </div>
         </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modal Header</h4>
+            </div>
+            <div class="modal-body">
+                <p>Some text in the modal.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
     </div>
 </div>

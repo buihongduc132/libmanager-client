@@ -31,6 +31,8 @@ export class IncomeDailyComponent {
     selectedDrink: Drink;
     selectedKeeper: number;
 
+    editingNote: number;
+
     constructor(private budgetServices: BudgetServices
         , private commonServices: CommonServices
         , private drinkServices: DrinkServices) {
@@ -67,6 +69,10 @@ export class IncomeDailyComponent {
 
     prepareAddNewIncome = this._prepareAddNewIncome;
     getSelectedKeeper = this._getSelectedKeeper;
+    toggleNoting = this._toggleNoting;
+    updateIncomeDetail = this._updateIncomeDetail;
+    resetEditingNote = this._resetEditingNote;
+    showFirstNChars = this._showFirstNChars;
 
     ngOnInit() {
         this.getIncomes();
@@ -77,6 +83,7 @@ export class IncomeDailyComponent {
         this.showMoreDetails = false;
         this.showDeletedDate = false;
         this.toggledDetail = -1;
+        this.editingNote = -1;
         this.selectedDrink = new Drink();
     }
 
@@ -84,18 +91,52 @@ export class IncomeDailyComponent {
         this.getIncomes();
     }
 
+    _showFirstNChars(text: string, numberOfChar: number = 20) {
+        if(text) {
+            return text.length < numberOfChar ? text : `${text.substr(0,numberOfChar)} ...`;
+        }
+        else {
+            return '';
+        }
+    }
+
+    _toggleNoting(detailId: number) {
+        if (detailId == this.editingNote) {
+            this.editingNote = -1;
+        }
+        else {
+            this.editingNote = detailId;
+        }
+    }
+
+
     _enableIncomeDetail(detailId: number) {
         let newDetail = new IncomeDetail;
         newDetail.id = detailId;
         newDetail.isDeleted = false;
 
         this.budgetServices.editIncomeDetail(newDetail)
-        .subscribe(
+            .subscribe(
             details => {
                 this.getIncomes();
             }
             , err => this.err = err
-        )
+            )
+    }
+
+    _updateIncomeDetail(detail: IncomeDetail) {
+        this.budgetServices.editIncomeDetail(detail)
+            .subscribe(
+            details => {
+                this.getIncomes();
+                this.resetEditingNote();
+            }
+            , err => this.err = err
+            )
+    }
+
+    _resetEditingNote() {
+        this.editingNote = -1;
     }
 
     _deleteIncomeDetail(detailId: number) {
@@ -104,12 +145,12 @@ export class IncomeDailyComponent {
         newDetail.isDeleted = true;
 
         this.budgetServices.editIncomeDetail(newDetail)
-        .subscribe(
+            .subscribe(
             details => {
                 this.getIncomes();
             }
             , err => this.err = err
-        )
+            )
     }
 
 
@@ -131,24 +172,24 @@ export class IncomeDailyComponent {
 
     _addNewDetail() {
         this.budgetServices.addIncomeDetail(this.newIncomeDetail)
-        .subscribe(
+            .subscribe(
             incomeDetail => {
                 this.getIncomes();
             }
             , err => this.err = err
-        );
+            );
     }
 
     _onAddNewDetail(incomeId: number) {
         var preparedNewIncome = this.prepareAddNewIncome(incomeId);
         console.log(preparedNewIncome);
         this.budgetServices.editIncome(preparedNewIncome)
-        .subscribe(
+            .subscribe(
             income => {
                 this.getIncomes();
             }
             , err => this.err = err
-        )
+            )
     }
 
     _isValidIncome(income: Income) {
@@ -165,8 +206,8 @@ export class IncomeDailyComponent {
     }
 
     _getSelectedKeeper() {
-        for (let i = 0 ; i < this.people.length; i++) {
-            if(this.people[i].id == this.selectedKeeper) {
+        for (let i = 0; i < this.people.length; i++) {
+            if (this.people[i].id == this.selectedKeeper) {
                 return this.people[i];
             }
         }
@@ -185,8 +226,8 @@ export class IncomeDailyComponent {
     _getTotal(income: Income) {
         var total = 0;
         income.IncomeDetails.forEach(detail => {
-            if(!detail.isDeleted) {
-                total += detail.price * (100 - detail.discount)/100;
+            if (!detail.isDeleted) {
+                total += detail.price * (100 - detail.discount) / 100;
             }
         })
 

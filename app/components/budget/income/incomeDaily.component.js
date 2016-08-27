@@ -52,6 +52,10 @@ var IncomeDailyComponent = (function () {
         this.enableIncomeDetail = this._enableIncomeDetail;
         this.prepareAddNewIncome = this._prepareAddNewIncome;
         this.getSelectedKeeper = this._getSelectedKeeper;
+        this.toggleNoting = this._toggleNoting;
+        this.updateIncomeDetail = this._updateIncomeDetail;
+        this.resetEditingNote = this._resetEditingNote;
+        this.showFirstNChars = this._showFirstNChars;
     }
     IncomeDailyComponent.prototype.ngOnInit = function () {
         this.getIncomes();
@@ -62,10 +66,28 @@ var IncomeDailyComponent = (function () {
         this.showMoreDetails = false;
         this.showDeletedDate = false;
         this.toggledDetail = -1;
+        this.editingNote = -1;
         this.selectedDrink = new drink_1.Drink();
     };
     IncomeDailyComponent.prototype.onSubmit = function () {
         this.getIncomes();
+    };
+    IncomeDailyComponent.prototype._showFirstNChars = function (text, numberOfChar) {
+        if (numberOfChar === void 0) { numberOfChar = 20; }
+        if (text) {
+            return text.length < numberOfChar ? text : text.substr(0, numberOfChar) + " ...";
+        }
+        else {
+            return '';
+        }
+    };
+    IncomeDailyComponent.prototype._toggleNoting = function (detailId) {
+        if (detailId == this.editingNote) {
+            this.editingNote = -1;
+        }
+        else {
+            this.editingNote = detailId;
+        }
     };
     IncomeDailyComponent.prototype._enableIncomeDetail = function (detailId) {
         var _this = this;
@@ -76,6 +98,17 @@ var IncomeDailyComponent = (function () {
             .subscribe(function (details) {
             _this.getIncomes();
         }, function (err) { return _this.err = err; });
+    };
+    IncomeDailyComponent.prototype._updateIncomeDetail = function (detail) {
+        var _this = this;
+        this.budgetServices.editIncomeDetail(detail)
+            .subscribe(function (details) {
+            _this.getIncomes();
+            _this.resetEditingNote();
+        }, function (err) { return _this.err = err; });
+    };
+    IncomeDailyComponent.prototype._resetEditingNote = function () {
+        this.editingNote = -1;
     };
     IncomeDailyComponent.prototype._deleteIncomeDetail = function (detailId) {
         var _this = this;

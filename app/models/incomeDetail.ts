@@ -8,4 +8,5 @@ export class IncomeDetail extends BaseObject{
     Dish: Drink;
     keeper: Person;
     isDeleted: boolean;
+    note: string;
 }
